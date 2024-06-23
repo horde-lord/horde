@@ -4,6 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Horde.$(AssemblyName)</PackageId>
+    <Title>Horde Core</Title>
+    <PackageProjectUrl>https://github.com/horde-lord/horde</PackageProjectUrl>
+    <AssemblyVersion>0.1.0</AssemblyVersion>
+    <Description>Open source gamification library. Offers Currency, community, user and game management</Description>
+    <Authors>Tribal Arenas, Inc</Authors>
   </PropertyGroup>
 
   <ItemGroup>
