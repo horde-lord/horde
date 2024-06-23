@@ -27,7 +27,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Create NuGet package
-      run: dotnet pack --configuration Release --output nupkg -p:PackageId=Horde.Core
+      run: dotnet pack --project Core/Core.csproj --configuration Release --output nupkg -p:PackageId=Horde.Core
     - name: Publish
       run: dotnet nuget push nupkg/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
     
