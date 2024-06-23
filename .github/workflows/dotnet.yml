@@ -23,23 +23,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Create NuGet package
-      run: dotnet pack --configuration Release --no-build --output nupkg
-
-    - name: Publish NuGet package
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        # Filepath of the project to be packaged, relative to root of repository
-        PROJECT_FILE_PATH: Core/Core.csproj 
-
-        # NuGet package id, used for version detection & defaults to project name
-        PACKAGE_NAME: Horde.Core # (Optional if same as project name)
-
-        # API key to authenticate with NuGet server
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }} 
-
-        # NuGet server uri hosting the packages, defaults to https://api.nuget.org
-        NUGET_SOURCE: https://api.nuget.org
+      run: dotnet pack --configuration Release --output nupkg
+    - name: Publish
+      run: dotnet nuget push nupkg/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+    
