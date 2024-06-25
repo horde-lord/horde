@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Create NuGet package
-      run: dotnet pack ../../Core/Core.csproj --configuration Release --output nupkg -p:PackageId=Horde.Core -p:PackageVersion=1.0.1
+      run: dotnet pack Core/Core.csproj --configuration Release --output nupkg -p:PackageId=Horde.Core -p:PackageVersion=1.0.2
     - name: Publish
       run: dotnet nuget push nupkg/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
