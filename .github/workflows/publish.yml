@@ -1,6 +1,6 @@
 name: Publish
 
-on: [schedule]
+on: workflow_dispatch
 jobs: 
   builds:
     runs-on: ubuntu-latest
