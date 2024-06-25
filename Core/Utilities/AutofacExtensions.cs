@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using Core.Domains.Admin;
+using Horde.Core.Domains.Admin;
 
-namespace Core.Utilities
+namespace Horde.Core.Utilities
 {
     public static class AutofacExtensions
     {

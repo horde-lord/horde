@@ -1,6 +1,6 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 
-namespace Core.Domains.Games.Entities
+namespace Horde.Core.Domains.Games.Entities
 {
     public class GameMode: BaseEntity
     {

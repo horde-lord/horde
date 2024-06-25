@@ -1,7 +1,7 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Domains.Commerce
+namespace Horde.Core.Domains.Commerce
 {
     public class ProductVariant : BaseEntity
     {

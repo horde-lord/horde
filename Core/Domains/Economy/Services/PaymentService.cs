@@ -1,17 +1,17 @@
 ﻿using Autofac;
-using Core;
-using Core.Domains.World.Entities;
-using Core.Interfaces.Data;
-using Core.Interfaces.Payment;
+using Horde.Core;
+using Horde.Core.Domains.World.Entities;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Interfaces.Payment;
 using Serilog;
-using Core.Utilities;
-using Core.Domains.World.Services;
-using Core.Domains.Admin.Entities;
-using Core.Services;
-using Core.Domains.Economy.Entities;
-using Core.Ecosystem.Entities;
+using Horde.Core.Utilities;
+using Horde.Core.Domains.World.Services;
+using Horde.Core.Domains.Admin.Entities;
+using Horde.Core.Services;
+using Horde.Core.Domains.Economy.Entities;
+using Horde.Core.Ecosystem.Entities;
 
-namespace Core.Domains.Economy.Services
+namespace Horde.Core.Domains.Economy.Services
 {
     public class PaymentService : BaseService
     {

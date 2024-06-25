@@ -1,12 +1,12 @@
 ﻿using Autofac;
-using Core.Domains.World.Entities;
-using Core.Interfaces.Data;
-using Core.Services;
-using Transaction = Core.Domains.Economy.Entities.Transaction;
-using Core.Domains.Economy.Services;
-using Core.Domains.Economy.Entities;
+using Horde.Core.Domains.World.Entities;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
+using Transaction = Horde.Core.Domains.Economy.Entities.Transaction;
+using Horde.Core.Domains.Economy.Services;
+using Horde.Core.Domains.Economy.Entities;
 
-namespace Core.Domains.Economy.Services
+namespace Horde.Core.Domains.Economy.Services
 {
     public class VirtualCurrencyService : BaseService
     {

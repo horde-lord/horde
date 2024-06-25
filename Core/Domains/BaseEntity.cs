@@ -1,5 +1,5 @@
-﻿using Core.Ecosystem.Entities;
-using Core.Interfaces.Data;
+﻿using Horde.Core.Ecosystem.Entities;
+using Horde.Core.Interfaces.Data;
 using Serilog;
 using shortid;
 using System.ComponentModel;
@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using System.Threading.Tasks.Dataflow;
 
-namespace Core.Domains
+namespace Horde.Core.Domains
 {
     public abstract class BaseEntity : IEquatable<BaseEntity>, IEntity
     {

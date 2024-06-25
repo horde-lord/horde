@@ -1,8 +1,8 @@
-﻿using Core.Domains.Economy.Entities;
-using Core.Interfaces.Data;
+﻿using Horde.Core.Domains.Economy.Entities;
+using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.Commerce
+namespace Horde.Core.Domains.Commerce
 {
     public class Price : BaseEntity
     {

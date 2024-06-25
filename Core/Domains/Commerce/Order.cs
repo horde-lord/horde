@@ -1,7 +1,7 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.Commerce
+namespace Horde.Core.Domains.Commerce
 {
     public class Order : BaseEntity
     {
@@ -41,7 +41,7 @@ namespace Core.Domains.Commerce
     }
 }
 
-namespace Core
+namespace Horde.Core
 {
     public enum OrderStatusType
     {

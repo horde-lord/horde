@@ -1,6 +1,6 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 
-namespace Core.Domains.Admin.Entities
+namespace Horde.Core.Domains.Admin.Entities
 {
     public class Asset : BaseEntity
     {
@@ -12,7 +12,6 @@ namespace Core.Domains.Admin.Entities
 
     }
 
-    //0 1 4 5 pada hai
     public enum AssetType
     {
         Logo, 

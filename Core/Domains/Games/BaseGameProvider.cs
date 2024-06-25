@@ -1,13 +1,13 @@
 ﻿using Autofac;
-using Core.Domains.Games.Entities;
-using Core.Ecosystem.Entities;
-using Core.Interfaces;
-using Core.Interfaces.Data;
-using Core.Services;
-using Core.Utilities;
+using Horde.Core.Domains.Games.Entities;
+using Horde.Core.Ecosystem.Entities;
+using Horde.Core.Interfaces;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
+using Horde.Core.Utilities;
 using System.Net.Http.Json;
 
-namespace Core.Domains.Games
+namespace Horde.Core.Domains.Games
 {
     /// <summary>
     /// Provides basic contract to add a game to the network

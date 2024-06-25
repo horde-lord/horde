@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using Core.Domains.Economy.Entities;
-using Core.Domains.World.Entities;
-using Core.Interfaces.Data;
+using Horde.Core.Domains.Economy.Entities;
+using Horde.Core.Domains.World.Entities;
+using Horde.Core.Interfaces.Data;
 
-namespace Core.Services
+namespace Horde.Core.Services
 {
     public class AuthService : BaseService
     {

@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Core.Interfaces.Comm
+namespace Horde.Core.Interfaces.Comm
 {
     public interface IMessage<T> where T : new()
     {

@@ -1,8 +1,8 @@
-﻿using Core.Interfaces;
-using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces;
+using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.Admin.Entities
+namespace Horde.Core.Domains.Admin.Entities
 {
     public class Tenant : BaseEntity, INamed
     {

@@ -1,8 +1,8 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.Games.Entities
+namespace Horde.Core.Domains.Games.Entities
 {
     public class Alias : BaseEntity
     {

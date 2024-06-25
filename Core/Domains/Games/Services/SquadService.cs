@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using Core.Domains.Games.Entities;
-using Core.Interfaces.Data;
-using Core.Services;
+using Horde.Core.Domains.Games.Entities;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
 
-namespace Core.Domains.Games.Services
+namespace Horde.Core.Domains.Games.Services
 {
     public class SquadService : BaseService
     {

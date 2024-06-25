@@ -1,4 +1,4 @@
-﻿namespace Core.Domains.World.Entities
+﻿namespace Horde.Core.Domains.World.Entities
 {
     public class CompanyEmployee: TeamMember
     {

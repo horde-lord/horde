@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces.Comm
+﻿namespace Horde.Core.Interfaces.Comm
 {
     public interface IEmailClient
     {

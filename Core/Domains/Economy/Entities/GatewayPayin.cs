@@ -1,7 +1,7 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.Economy.Entities
+namespace Horde.Core.Domains.Economy.Entities
 {
     public class GatewayPayin : BaseEntity
     {
@@ -33,7 +33,7 @@ namespace Core.Domains.Economy.Entities
     }
 }
 
-namespace Core
+namespace Horde.Core
 {
     public enum PayinStatusType
     {

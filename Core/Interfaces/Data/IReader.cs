@@ -1,6 +1,6 @@
-﻿using Core.Domains;
+﻿using Horde.Core.Domains;
 
-namespace Core.Interfaces.Data
+namespace Horde.Core.Interfaces.Data
 {
     public interface IReader<TEntity>
         where TEntity : BaseEntity

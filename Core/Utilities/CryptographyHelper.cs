@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Core.Utilities
+namespace Horde.Core.Utilities
 {
     public static class CryptographyHelper
     {

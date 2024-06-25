@@ -1,14 +1,14 @@
-﻿using Core.Domains.Games.Entities;
-using Core.Domains.Admin.Entities;
-using Core.Ecosystem.Entities;
-using Core.Interfaces;
-using Core.Interfaces.Data;
-using Core.Services;
+﻿using Horde.Core.Domains.Games.Entities;
+using Horde.Core.Domains.Admin.Entities;
+using Horde.Core.Ecosystem.Entities;
+using Horde.Core.Interfaces;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace Core.Domains.World.Entities
+namespace Horde.Core.Domains.World.Entities
 {
     public class Tribe : BaseEntity, ICached, IConversationContext
     {
@@ -203,7 +203,7 @@ namespace Core.Domains.World.Entities
     }
 }
 
-namespace Core.Ecosystem.Entities
+namespace Horde.Core.Ecosystem.Entities
 {
     public enum TournamentVisibility
     {

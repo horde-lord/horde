@@ -1,8 +1,8 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.World.Entities
+namespace Horde.Core.Domains.World.Entities
 {
     public class Connection : BaseEntity
     {
@@ -29,7 +29,7 @@ namespace Core.Domains.World.Entities
     }
 }
 
-namespace Core
+namespace Horde.Core
 {
     public enum ConnectionType
     {

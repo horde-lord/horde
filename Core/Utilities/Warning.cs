@@ -1,6 +1,6 @@
-﻿using Core.Domains;
+﻿using Horde.Core.Domains;
 
-namespace Core.Utilities
+namespace Horde.Core.Utilities
 {
     public class MinorWarning : Warning
     {

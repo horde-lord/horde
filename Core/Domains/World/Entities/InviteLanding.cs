@@ -1,6 +1,6 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 
-namespace Core.Domains.World.Entities
+namespace Horde.Core.Domains.World.Entities
 {
     public class InviteLanding : BaseEntity
     {

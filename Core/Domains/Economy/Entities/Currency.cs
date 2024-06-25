@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Core.Interfaces;
-using Core.Interfaces.Data;
+using Horde.Core.Interfaces;
+using Horde.Core.Interfaces.Data;
 
-namespace Core.Domains.Economy.Entities;
+namespace Horde.Core.Domains.Economy.Entities;
 
 public class Currency: BaseEntity, INamed
 {

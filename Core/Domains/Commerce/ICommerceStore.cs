@@ -1,4 +1,4 @@
-﻿namespace Core.Domains.Commerce
+﻿namespace Horde.Core.Domains.Commerce
 {
     public interface ICommerceStore
     {

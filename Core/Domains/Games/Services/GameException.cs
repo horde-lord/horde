@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Core.Domains.Games.Services
+namespace Horde.Core.Domains.Games.Services
 {
     [Serializable]
     internal class GameException : Exception

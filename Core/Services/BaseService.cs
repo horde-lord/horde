@@ -1,23 +1,23 @@
 ﻿using Autofac;
-using Core.Domains;
-using Core.Interfaces;
-using Core.Interfaces.Data;
-using Core.Utilities;
+using Horde.Core.Domains;
+using Horde.Core.Interfaces;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Utilities;
 using Serilog;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using Core.Interfaces.Comm;
+using Horde.Core.Interfaces.Comm;
 using shortid.Configuration;
 using shortid;
-using Core.Domains.Admin.Entities;
+using Horde.Core.Domains.Admin.Entities;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 using Mapster;
 using CsvHelper.Configuration;
 using CsvHelper;
-using Core.Domains.Admin;
+using Horde.Core.Domains.Admin;
 
-namespace Core.Services
+namespace Horde.Core.Services
 {
     public class BaseService : ICoreService
     {

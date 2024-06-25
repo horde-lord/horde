@@ -1,10 +1,10 @@
-﻿using Core.Domains.Games.Entities;
-using Core.Domains.Games.Services;
-using Core.Ecosystem.Entities;
-using Core.Services;
+﻿using Horde.Core.Domains.Games.Entities;
+using Horde.Core.Domains.Games.Services;
+using Horde.Core.Ecosystem.Entities;
+using Horde.Core.Services;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.World.Entities
+namespace Horde.Core.Domains.World.Entities
 {
     public class Alliance : Team
     {

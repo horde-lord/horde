@@ -1,8 +1,8 @@
-﻿using Core.Domains.World.Entities;
-using Core.Interfaces.Data;
+﻿using Horde.Core.Domains.World.Entities;
+using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.Economy.Entities
+namespace Horde.Core.Domains.Economy.Entities
 {
     public class AccountSponsor : BaseConfigurableEntity
     {

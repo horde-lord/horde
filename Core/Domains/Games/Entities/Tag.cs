@@ -1,7 +1,7 @@
-﻿using Core.Interfaces;
-using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces;
+using Horde.Core.Interfaces.Data;
 
-namespace Core.Domains.Games.Entities
+namespace Horde.Core.Domains.Games.Entities
 {
     public class Tag : BaseEntity, INamed
     {

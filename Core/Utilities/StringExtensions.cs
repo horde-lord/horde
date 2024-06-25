@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Core.Utilities
+namespace Horde.Core.Utilities
 {
     public static class StringExtensions
     {

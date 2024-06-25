@@ -1,9 +1,9 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Core.Domains.Games.Entities
+namespace Horde.Core.Domains.Games.Entities
 {
     public class Game : BaseEntity
     {
@@ -44,7 +44,7 @@ namespace Core.Domains.Games.Entities
     }
 }
 
-namespace Core.Domains.Games.Entities
+namespace Horde.Core.Domains.Games.Entities
 {
     public enum IntegrationType
     {
@@ -52,7 +52,7 @@ namespace Core.Domains.Games.Entities
     }
 }
 
-namespace Core.Domains.Games.Entities
+namespace Horde.Core.Domains.Games.Entities
 {
     public enum GameType
     {

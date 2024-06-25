@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using Core.Interfaces.Data;
-using Core.Utilities;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Utilities;
 using System.Net.Http.Json;
 
-namespace Core.Services
+namespace Horde.Core.Services
 {
     public class CallbackService : BaseService
     {

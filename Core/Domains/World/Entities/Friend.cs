@@ -1,6 +1,6 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 
-namespace Core.Domains.World.Entities
+namespace Horde.Core.Domains.World.Entities
 {
     public class Friend : BaseEntity
     {
@@ -15,7 +15,7 @@ namespace Core.Domains.World.Entities
 
 }
 
-namespace Core.Domains.World.Entities
+namespace Horde.Core.Domains.World.Entities
 {
     public enum FriendshipStatusType
     {

@@ -1,12 +1,12 @@
 ﻿using Autofac;
-using Core.Domains.World.Entities;
-using Core.Interfaces.Data;
-using Core.Services;
+using Horde.Core.Domains.World.Entities;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
 using Microsoft.VisualBasic;
 using System.Globalization;
-using Core.Domains.Economy.Entities;
+using Horde.Core.Domains.Economy.Entities;
 
-namespace Core.Domains.Economy.Services
+namespace Horde.Core.Domains.Economy.Services
 {
     public class ActivityService : BaseService
     {

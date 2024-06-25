@@ -1,4 +1,4 @@
-﻿namespace Core.Domains
+﻿namespace Horde.Core.Domains
 {
     public class BaseEvent
     {

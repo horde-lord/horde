@@ -1,11 +1,11 @@
 ﻿using Autofac;
-using Core.Domains.Admin.Entities;
-using Core.Interfaces.Data;
-using Core.Utilities;
+using Horde.Core.Domains.Admin.Entities;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Utilities;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.Domains.Admin
+namespace Horde.Core.Domains.Admin
 {
     public class TenantManager
     {

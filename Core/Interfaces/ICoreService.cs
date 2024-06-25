@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using Core.Domains;
-using Core.Interfaces.Data;
+using Horde.Core.Domains;
+using Horde.Core.Interfaces.Data;
 
-namespace Core.Interfaces
+namespace Horde.Core.Interfaces
 {
     public interface ICoreService
     {

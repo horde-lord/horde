@@ -1,6 +1,6 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 
-namespace Core.Domains.Commerce
+namespace Horde.Core.Domains.Commerce
 {
     public class Vendor : BaseEntity
     {

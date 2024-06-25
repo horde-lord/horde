@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Core.Interfaces.Data
+namespace Horde.Core.Interfaces.Data
 {
     public interface IRepoWriter : IRepoReader
     {

@@ -1,7 +1,7 @@
-﻿using Core.Interfaces;
-using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces;
+using Horde.Core.Interfaces.Data;
 
-namespace Core.Domains.World.Entities
+namespace Horde.Core.Domains.World.Entities
 {
     public class UserContent : BaseEntity, IFeedContent
     {

@@ -1,19 +1,19 @@
 ﻿using Autofac;
-using Core.Domains;
-using Core.Domains.World.Entities;
-using Core.Domains.World.Services;
-using Core.Domains.Games.Entities;
-using Core.Domains.Games.Services;
-using Core.Interfaces.Data;
-using Core.Utilities;
+using Horde.Core.Domains;
+using Horde.Core.Domains.World.Entities;
+using Horde.Core.Domains.World.Services;
+using Horde.Core.Domains.Games.Entities;
+using Horde.Core.Domains.Games.Services;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Utilities;
 using Serilog;
 using System.Data;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
-using Core.Domains.Economy.Services;
+using Horde.Core.Domains.Economy.Services;
 using EnsureThat;
 
-namespace Core.Services
+namespace Horde.Core.Services
 {
     public class RegistrationService : BaseService
     {

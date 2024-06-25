@@ -1,11 +1,11 @@
 ﻿using Autofac;
-using Core.Domains.World.Entities;
-using Core.Domains.Games.Entities;
-using Core.Interfaces.Data;
-using Core.Services;
-using Core.Utilities;
+using Horde.Core.Domains.World.Entities;
+using Horde.Core.Domains.Games.Entities;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
+using Horde.Core.Utilities;
 
-namespace Core.Domains.Games.Services
+namespace Horde.Core.Domains.Games.Services
 {
     public class PlayerService : BaseService
     {

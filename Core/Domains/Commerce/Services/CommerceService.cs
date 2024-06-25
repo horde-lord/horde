@@ -1,13 +1,13 @@
 ﻿using Autofac;
-using Core.Domains.Economy.Entities;
-using Core.Domains.Economy.Services;
-using Core.Domains.World.Entities;
-using Core.Domains.World.Services;
-using Core.Interfaces.Data;
-using Core.Services;
-using Core.Utilities;
+using Horde.Core.Domains.Economy.Entities;
+using Horde.Core.Domains.Economy.Services;
+using Horde.Core.Domains.World.Entities;
+using Horde.Core.Domains.World.Services;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
+using Horde.Core.Utilities;
 
-namespace Core.Domains.Commerce.Services
+namespace Horde.Core.Domains.Commerce.Services
 {
     public class CommerceService : BaseService
     {

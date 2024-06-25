@@ -1,10 +1,10 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Core.Domains.Games.Entities;
-using Core.Domains.Admin.Entities;
+using Horde.Core.Domains.Games.Entities;
+using Horde.Core.Domains.Admin.Entities;
 
-namespace Core.Domains.World.Entities
+namespace Horde.Core.Domains.World.Entities
 {
     public class User : BaseEntity
     {
@@ -83,7 +83,7 @@ namespace Core.Domains.World.Entities
 	}
 }
 
-namespace Core
+namespace Horde.Core
 {
     public enum GenderType
     {

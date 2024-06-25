@@ -1,18 +1,18 @@
 ﻿using Autofac;
-using Core.Domains.Admin.Entities;
-using Core.Interfaces.Data;
-using Core.Interfaces.Payment;
-using Core.Services;
-using Core.Utilities;
+using Horde.Core.Domains.Admin.Entities;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Interfaces.Payment;
+using Horde.Core.Services;
+using Horde.Core.Utilities;
 using Serilog;
-using Account = Core.Domains.Economy.Entities.Account;
-using Core.Domains.Economy.Services;
-using Core.Domains.Economy.Entities;
+using Account = Horde.Core.Domains.Economy.Entities.Account;
+using Horde.Core.Domains.Economy.Services;
+using Horde.Core.Domains.Economy.Entities;
 using Microsoft.Extensions.Hosting;
-using Core.Domains.Commerce;
-using Core.Domains.Commerce.Services;
+using Horde.Core.Domains.Commerce;
+using Horde.Core.Domains.Commerce.Services;
 
-namespace Core.Domains.World.Services
+namespace Horde.Core.Domains.World.Services
 {
     public class GatewayService : BaseService, IHostedService
     {

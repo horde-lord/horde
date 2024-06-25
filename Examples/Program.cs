@@ -1,4 +1,6 @@
-﻿namespace Examples
+﻿using Horde.Core;
+
+namespace Examples
 {
     internal class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces.Data
+﻿namespace Horde.Core.Interfaces.Data
 {
     public interface IStash
     {

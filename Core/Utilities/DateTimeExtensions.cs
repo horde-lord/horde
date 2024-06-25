@@ -1,6 +1,6 @@
 ﻿using TimeZoneConverter;
 
-namespace Core.Utilities
+namespace Horde.Core.Utilities
 {
     public static class CoreDateTimeExtensions
     {

@@ -1,6 +1,6 @@
-﻿using Core.Domains.Economy.Entities;
+﻿using Horde.Core.Domains.Economy.Entities;
 
-namespace Core.Interfaces.Payment
+namespace Horde.Core.Interfaces.Payment
 {
     public interface IGatewayPayinProvider
     {

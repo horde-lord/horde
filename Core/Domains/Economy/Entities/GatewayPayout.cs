@@ -1,8 +1,8 @@
-﻿using Core.Interfaces.Data;
-using Core.Interfaces.Payment;
+﻿using Horde.Core.Interfaces.Data;
+using Horde.Core.Interfaces.Payment;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.Economy.Entities
+namespace Horde.Core.Domains.Economy.Entities
 {
     public class GatewayPayout : BaseEntity
     {
@@ -26,7 +26,7 @@ namespace Core.Domains.Economy.Entities
     }
 }
 
-namespace Core
+namespace Horde.Core
 {
     public enum PayoutStatusType
     {

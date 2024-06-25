@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces;
+﻿namespace Horde.Core.Interfaces;
 
 public interface IProfile: INamed
 {

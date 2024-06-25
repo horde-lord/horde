@@ -1,11 +1,11 @@
 ﻿using Autofac;
-using Core.Domains.Economy.Entities;
-using Core.Interfaces.Data;
-using Core.Services;
+using Horde.Core.Domains.Economy.Entities;
+using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
 using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 
-namespace Core.Domains.World.Services
+namespace Horde.Core.Domains.World.Services
 {
 
     public class CurrencyService : BaseService

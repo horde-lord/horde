@@ -1,9 +1,9 @@
-﻿using Core.Domains.World.Entities;
-using Core.Interfaces.Data;
+﻿using Horde.Core.Domains.World.Entities;
+using Horde.Core.Interfaces.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domains.Games.Entities
+namespace Horde.Core.Domains.Games.Entities
 {
     public class Player : BaseEntity
     {

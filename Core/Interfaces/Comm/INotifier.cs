@@ -1,6 +1,6 @@
-﻿using Core.Domains;
+﻿using Horde.Core.Domains;
 
-namespace Core.Interfaces.Comm
+namespace Horde.Core.Interfaces.Comm
 {
     public interface INotifier
     {
@@ -19,7 +19,7 @@ namespace Core.Interfaces.Comm
     }
 }
 
-namespace Core
+namespace Horde.Core
 {
     public enum NotificationType
     {

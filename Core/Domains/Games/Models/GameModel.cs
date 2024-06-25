@@ -1,4 +1,4 @@
-﻿using Core.Domains.Games.Entities;
+﻿using Horde.Core.Domains.Games.Entities;
 
 
 public class GameModel : Game

@@ -1,6 +1,6 @@
-﻿using Core.Interfaces.Data;
+﻿using Horde.Core.Interfaces.Data;
 
-namespace Core.Services
+namespace Horde.Core.Services
 {
     public class GlobalStash : IStash
     {
