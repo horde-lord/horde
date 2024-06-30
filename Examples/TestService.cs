@@ -12,11 +12,13 @@ namespace Examples
         {
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
             //Initialize and migrate sqlite
             GetRepository(ContextNames.World).CreateDatabase();
-            Get<WorldService>().Init();
+            //run migrations as explained in readme
+
+            await Get<WorldService>().Init();
             return Task.CompletedTask;
         }
 
