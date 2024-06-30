@@ -13,7 +13,7 @@ namespace Horde.Core.Domains.World.Entities
 
 
         [NotMapped]
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
     }
 }
 

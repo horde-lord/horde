@@ -6,7 +6,7 @@ namespace Horde.Core.Domains.World.Entities
     public class TribeStats : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int TribeId { get; set; }
         public Tribe Tribe { get; set; }
         public string JsonData { get; set; }

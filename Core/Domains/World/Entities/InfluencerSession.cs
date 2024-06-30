@@ -6,7 +6,7 @@ namespace Horde.Core.Domains.World.Entities
     public class InfluencerSession : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int CasterId { get; set; }
         public Influencer Caster { get; set; }
         public int? MatchId { get; set; }

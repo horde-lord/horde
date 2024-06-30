@@ -8,7 +8,7 @@ namespace Horde.Core.Domains.Economy.Entities
     public class Account : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
         public decimal Balance { get; set; }
         public virtual Currency Currency { get; set; }
         public int CurrencyId { get; set; }

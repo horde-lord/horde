@@ -4,7 +4,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public class BountyHunter : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public User Hunter { get; set; }
         public int HunterId { get; set; }
         public Bounty Bounty { get; set; }

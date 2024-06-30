@@ -12,11 +12,11 @@ using Microsoft.Extensions.Hosting;
 using Horde.Core.Domains.Commerce;
 using Horde.Core.Domains.Commerce.Services;
 
-namespace Horde.Core.Domains.World.Services
+namespace Horde.Core.Domains.Economy.Services
 {
     public class GatewayService : BaseService, IHostedService
     {
-        public GatewayService(ILifetimeScope scope, ContextNames name = ContextNames.Money) : base(scope, name)
+        public GatewayService(ILifetimeScope scope, ContextNames name = ContextNames.Economy) : base(scope, name)
         {
         }
 

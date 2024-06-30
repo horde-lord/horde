@@ -4,7 +4,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public class InviteLanding : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int UserId { get; set; }
         public User User { get; set; }
         public int ReferrerId { get; set; }

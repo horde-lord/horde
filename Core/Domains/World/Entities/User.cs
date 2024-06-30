@@ -16,7 +16,7 @@ namespace Horde.Core.Domains.World.Entities
             Roles = new List<UserRole>();
         }
         [NotMapped]
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         [MaxLength(100)]
         public string Username { get; set; }
         [MaxLength(100)]

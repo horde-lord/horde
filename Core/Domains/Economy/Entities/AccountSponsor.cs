@@ -7,7 +7,7 @@ namespace Horde.Core.Domains.Economy.Entities
     public class AccountSponsor : BaseConfigurableEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
         public int UserId { get; set; }
         public string ProviderName { get; set; }
         public string ProviderCredentials { get; set; }

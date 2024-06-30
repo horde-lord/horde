@@ -5,7 +5,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public class DirectConversation : BaseEntity, IConversationContext
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
 
         public int? ConversationId { get; set; }
 

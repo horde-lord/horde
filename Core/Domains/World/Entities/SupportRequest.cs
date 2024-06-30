@@ -7,7 +7,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public class SupportRequest : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int UserId { get; set; }
         public User User { get; set; }
         public int AssignedToUserId { get; set; }

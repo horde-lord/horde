@@ -4,7 +4,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public class Friend : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int FirstUserId { get; set; }
         public int SecondUserId { get; set; }
         public User FirstUser { get; set; }

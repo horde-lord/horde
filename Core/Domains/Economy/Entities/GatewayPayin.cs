@@ -6,7 +6,7 @@ namespace Horde.Core.Domains.Economy.Entities
     public class GatewayPayin : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
         public string GatewayName { get; set; } //Stripe , OnMeta
         public string GatewaySubAccountName { get; set; } // Upi , CreditCard
         public string DataJson { get; set; }

@@ -5,13 +5,13 @@ using Horde.Core.Services;
 using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 
-namespace Horde.Core.Domains.World.Services
+namespace Horde.Core.Domains.Economy.Services
 {
 
     public class CurrencyService : BaseService
     {
         IMemoryCache _cache;
-        public CurrencyService(ILifetimeScope scope, ContextNames name = ContextNames.Ecosystem) : base(scope, name)
+        public CurrencyService(ILifetimeScope scope, ContextNames name = ContextNames.World) : base(scope, name)
         {
             _cache = scope.Resolve<IMemoryCache>();
         }

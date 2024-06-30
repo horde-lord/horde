@@ -1,5 +1,8 @@
 ﻿using Autofac;
+using Autofac.Builder;
 using Horde.Core.Domains.Admin;
+using Horde.Core.Interfaces;
+using Horde.Core.Services;
 
 namespace Horde.Core.Utilities
 {
@@ -14,5 +17,6 @@ namespace Horde.Core.Utilities
             tenantManager.SetTenant(tenantId??1,refreshCache);
             return childScope;
         }
+        
     }
 }

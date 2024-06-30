@@ -6,7 +6,7 @@ namespace Horde.Core.Domains.Admin.Entities
 {
     public class Tenant : BaseEntity, INamed
     {
-        public override ContextNames Context => ContextNames.Partners;
+        public override ContextNames Context => ContextNames.Admin;
         public List<Asset> Assets { get; set; }
 
         public Tenant(List<Asset> assets)

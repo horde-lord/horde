@@ -5,7 +5,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public class Talk : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public string Content { get; set; }
         public User Speaker { get; set; }
         public int SpeakerId { get; set; }

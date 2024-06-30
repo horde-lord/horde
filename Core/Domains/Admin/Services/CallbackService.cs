@@ -1,14 +1,15 @@
 ﻿using Autofac;
 using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
 using Horde.Core.Utilities;
 using System.Net.Http.Json;
 
-namespace Horde.Core.Services
+namespace Horde.Core.Domains.Admin.Services
 {
     public class CallbackService : BaseService
     {
-        public CallbackService(ILifetimeScope scope) 
-            : base(scope, ContextNames.Ecosystem)
+        public CallbackService(ILifetimeScope scope)
+            : base(scope, ContextNames.World)
         {
         }
         private async Task<Tout> CallbackAsync<Tin, Tout>(HttpMethod method, Tin input, string uri)
@@ -19,6 +20,6 @@ namespace Horde.Core.Services
             return await response.Content.ReadFromJsonAsync<Tout>();
         }
 
-        
+
     }
 }

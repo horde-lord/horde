@@ -34,15 +34,13 @@ namespace Horde.Core.Interfaces.Data
 
     public enum ContextNames
     {
-        Ecosystem,
-        League,
-        Money,
+        World,
+        League, //internal use
+        Economy,
         Game,
-        QuizGame,
-        CashFree,
-        Marketing,
-        Analysis,
+        Marketing, //internal use
+        Analysis, //internal use
         Commerce,
-        Partners
+        Admin
     }
 }

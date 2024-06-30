@@ -6,7 +6,7 @@ namespace Horde.Core.Domains.Economy.Entities
     public class TransactionHistory : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
         public Account Source { get; set; }
         public Account Destination { get; set; }
         public int? SourceId { get; set; }

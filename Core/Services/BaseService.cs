@@ -22,7 +22,7 @@ namespace Horde.Core.Services
     public class BaseService : ICoreService
     {
         private readonly ContextNames _defaultContext;
-        public BaseService(ILifetimeScope scope, ContextNames name = ContextNames.Ecosystem)
+        public BaseService(ILifetimeScope scope, ContextNames name = ContextNames.World)
         {
             Scope = scope;
             Configuration = scope.Resolve<IConfiguration>();

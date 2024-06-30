@@ -6,6 +6,6 @@ namespace Horde.Core.Domains.Economy.Entities
     public class FinancialEntity : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
     }
 }

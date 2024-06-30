@@ -6,7 +6,7 @@ namespace Horde.Core.Domains.Economy.Entities;
 
 public class Currency: BaseEntity, INamed
 {
-    public override ContextNames Context => ContextNames.Money;
+    public override ContextNames Context => ContextNames.Economy;
     public string Name { get; set; }
     public string ShortName { get; set; }
     public CurrencyNatureType Type { get; set; }

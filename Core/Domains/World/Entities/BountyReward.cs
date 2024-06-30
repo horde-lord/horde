@@ -4,7 +4,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public class BountyReward : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int Currency { get; set; }
         public decimal Amount { get; set; }
         public int Level { get; set; } = 1;

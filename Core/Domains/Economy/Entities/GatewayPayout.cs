@@ -7,7 +7,7 @@ namespace Horde.Core.Domains.Economy.Entities
     public class GatewayPayout : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
         public string GatewayName { get; set; }
         public string GatewaySubAccountName { get; set; }
         public PayoutType Type { get; set; }

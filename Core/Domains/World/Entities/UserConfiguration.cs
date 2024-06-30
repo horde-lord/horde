@@ -8,7 +8,7 @@ namespace Horde.Core.Domains.World.Entities
     public class UserConfiguration : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public string Name { get; set; }
         public string Value { get; set; }
         public string Remarks { get; set; }

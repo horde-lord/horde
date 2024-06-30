@@ -4,7 +4,7 @@ namespace Horde.Core.Domains.Admin.Entities
 {
     public class Asset : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Partners;
+        public override ContextNames Context => ContextNames.Admin;
         public AssetType Type { get; set; }
         public string Value { get; set; }
         public int TenantId { get; set; }

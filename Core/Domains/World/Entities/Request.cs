@@ -4,7 +4,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public abstract class Request : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int RequesterId { get; set; }
         public User Requester { get; set; }
         public List<Conversation>? Conversations { get; set; }

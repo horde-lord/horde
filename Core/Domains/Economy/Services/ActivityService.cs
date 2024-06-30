@@ -10,7 +10,7 @@ namespace Horde.Core.Domains.Economy.Services
 {
     public class ActivityService : BaseService
     {
-        public ActivityService(ILifetimeScope scope) : base(scope, ContextNames.Money)
+        public ActivityService(ILifetimeScope scope) : base(scope, ContextNames.Economy)
         {
         }
 

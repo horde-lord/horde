@@ -5,7 +5,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public class UserContent : BaseEntity, IFeedContent
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int UserId { get; set; }
         public User User { get; set; }
         public string Title { get ; set ; }

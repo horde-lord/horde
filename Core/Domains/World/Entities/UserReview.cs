@@ -5,7 +5,7 @@ namespace Horde.Core.Domains.World.Entities
 {
     public class UserReview : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int ReviewerId { get; set; }
         public User Reviewer { get; set; }
         public int EntityId { get; set; }

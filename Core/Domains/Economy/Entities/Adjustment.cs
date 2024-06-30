@@ -6,7 +6,7 @@ namespace Horde.Core.Domains.Economy.Entities
     public class Adjustment : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
         public Account Account { get; set; }
         public int AccountId { get; set; }
         public decimal Amount { get; set; }

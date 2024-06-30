@@ -10,7 +10,7 @@ namespace Horde.Core.Domains.World.Entities
         public Team() { }
 
         [NotMapped]
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
 
         public int OwnerId { get; set; }
         public User Owner { get; set; }
@@ -33,7 +33,7 @@ namespace Horde.Core.Domains.World.Entities
     {
         public int TeamId { get; set; }
         public virtual Team Team { get; set; }
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
 
         public TeamMemberStatusType MemberStatus { get; set; }
 

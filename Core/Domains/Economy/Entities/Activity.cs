@@ -9,7 +9,7 @@ namespace Horde.Core.Domains.Economy.Entities
 
     public class Activity : BaseEntity, INamed
     {
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
 
         public string Name { get; set; }
         public string Description { get; set; }
@@ -37,7 +37,7 @@ namespace Horde.Core.Domains.Economy.Entities
 
     public class ActivityLog : BaseEntity
     {
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
         public virtual Activity Activity { get; set; }
         public int ActivityId { get; set; }
         public virtual Transaction Transaction { get; set; }

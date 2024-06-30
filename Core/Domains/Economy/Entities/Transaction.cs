@@ -8,7 +8,7 @@ namespace Horde.Core.Domains.Economy.Entities
     {
         public Transaction() { AllowEvents = true; }
         [NotMapped]
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
         public virtual Account Source { get; set; }
         public virtual Account Destination { get; set; }
         public int SourceId { get; set; }

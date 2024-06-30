@@ -16,7 +16,7 @@ namespace Horde.Core.Domains.Economy.Services
     public class PaymentService : BaseService
     {
 
-        public PaymentService(ILifetimeScope scope) : base(scope, ContextNames.Money)
+        public PaymentService(ILifetimeScope scope) : base(scope, ContextNames.Economy)
         {
         }
 
@@ -141,7 +141,7 @@ namespace Horde.Core.Domains.Economy.Services
 
         public User GetUserByDiscordId(string connectionKey)
         {
-            var user = GetRepository(ContextNames.Ecosystem).GetNoTrackingQueryable<User>()
+            var user = GetRepository(ContextNames.World).GetNoTrackingQueryable<User>()
                 .SingleOrDefault(u => u.Connections.Any(c => c.ConnectionKey == connectionKey));
             return user;
         }
@@ -176,7 +176,7 @@ namespace Horde.Core.Domains.Economy.Services
         }
 
 
-        public override IEntityContextRepository<IEntityContext> GetRepository(ContextNames name = ContextNames.Money)
+        public override IEntityContextRepository<IEntityContext> GetRepository(ContextNames name = ContextNames.Economy)
         {
             return base.GetRepository(name);
         }
@@ -377,7 +377,7 @@ namespace Horde.Core.Domains.Economy.Services
 
                 repo.Upsert(adjustment);
                 await repo.SaveChanges();
-                var user = payment.GetRepository(ContextNames.Ecosystem).GetNoTrackingQueryable<User>()
+                var user = payment.GetRepository(ContextNames.World).GetNoTrackingQueryable<User>()
                     .SingleOrDefault(u => u.Id == account.UserId);
                 var sponsor = _<AccountSponsor>().SingleOrDefault(s => s.Id == account.AccountSponsorId);
                 await payment.TransferAmountFromGlobalAccount(user, amount, $"Adjustment_{adjustment.Id}",

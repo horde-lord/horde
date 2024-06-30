@@ -10,7 +10,7 @@ namespace Horde.Core.Domains.Economy.Services
 {
     public class VirtualCurrencyService : BaseService
     {
-        public VirtualCurrencyService(ILifetimeScope scope, ContextNames name = ContextNames.Money) : base(scope, name)
+        public VirtualCurrencyService(ILifetimeScope scope, ContextNames name = ContextNames.Economy) : base(scope, name)
         {
         }
 

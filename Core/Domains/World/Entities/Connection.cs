@@ -7,7 +7,7 @@ namespace Horde.Core.Domains.World.Entities
     public class Connection : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public string UserName { get; set; }
         public ConnectionType Type { get; set; }
         [MaxLength(100)]

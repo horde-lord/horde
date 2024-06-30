@@ -10,7 +10,7 @@ namespace Horde.Core.Domains.World.Entities
         public int? TransactionId { get; set; }
         public string Narration { get; set; }
 
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
     }
     public enum IncentiveType
     {

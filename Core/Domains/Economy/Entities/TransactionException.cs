@@ -6,7 +6,7 @@ namespace Horde.Core.Domains.Economy.Entities
     public class TransactionExceptionLog : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Money;
+        public override ContextNames Context => ContextNames.Economy;
         public int? TransactionId { get; set; }
         public string Exception { get; set; }
         public string StackTrace { get; set; }

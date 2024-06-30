@@ -6,7 +6,7 @@ namespace Horde.Core.Domains.World.Entities
     public class Influencer : BaseEntity
     {
         [NotMapped]
-        public override ContextNames Context => ContextNames.Ecosystem;
+        public override ContextNames Context => ContextNames.World;
         public int UserId { get; set; }
         public User User { get; set; }
         public string ChannelName { get; set; }

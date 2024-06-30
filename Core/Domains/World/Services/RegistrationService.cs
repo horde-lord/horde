@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Horde.Core.Domains;
 using Horde.Core.Domains.World.Entities;
-using Horde.Core.Domains.World.Services;
 using Horde.Core.Domains.Games.Entities;
 using Horde.Core.Domains.Games.Services;
 using Horde.Core.Interfaces.Data;
@@ -12,8 +11,9 @@ using System.Security.Claims;
 using System.Text.RegularExpressions;
 using Horde.Core.Domains.Economy.Services;
 using EnsureThat;
+using Horde.Core.Services;
 
-namespace Horde.Core.Services
+namespace Horde.Core.Domains.World.Services
 {
     public class RegistrationService : BaseService
     {
@@ -29,7 +29,7 @@ namespace Horde.Core.Services
                 userRole = new UserRole() { Role = roleEnum, UserId = id };
             if (userRole.Deleted == true)
                 userRole.Deleted = false;
-            await Save<UserRole>(userRole);
+            await Save(userRole);
         }
 
         public async Task RemoveRole(int id, string role)
@@ -42,14 +42,14 @@ namespace Horde.Core.Services
                 return;
             if (userRole.Deleted == false)
                 userRole.Deleted = true;
-            await Save<UserRole>(userRole);
+            await Save(userRole);
         }
 
         private readonly IEntityContextRepository<IEntityContext> _league;
 
-        public RegistrationService(ILifetimeScope scope) : base(scope, ContextNames.Ecosystem)
+        public RegistrationService(ILifetimeScope scope) : base(scope, ContextNames.World)
         {
-            _eco = base.GetRepository(ContextNames.Ecosystem);
+            _eco = base.GetRepository(ContextNames.World);
             _league = base.GetRepository(ContextNames.League);
 
         }
@@ -62,14 +62,14 @@ namespace Horde.Core.Services
             var connection = _<Connection>().FirstOrDefault(c => c.Type == connectionType && c.ConnectionKey == userPlatformId);
             if (connection == null || connection.Deleted)
             {
-                
+
                 registration = new Registration() { Key = userPlatformId, Name = username, Step = RegistrationStepType.Started };
 
                 User user = new User() { Username = username, Connections = new List<Connection>(), EmailId = email, ProfilePicUrl = avatar };
 
                 user.Connections.Add(new Connection()
                 {
-                    Id = connection == null?0:connection.Id,
+                    Id = connection == null ? 0 : connection.Id,
                     ConnectionKey = userPlatformId,
                     Type = connectionType,
                     UserName = username,
@@ -88,19 +88,19 @@ namespace Horde.Core.Services
             return registration;
         }
 
-       
+
 
         public async Task<User> HandleLoginRequest(User user)
         {
             //create or search user by the connection
             if (user.Id == 0)
             {
-                
+
                 return await SearchOrCreateRegistration(user);
             }
             else
             {
-                
+
                 user = await HandleConnectionRequest(user);
                 return user;
             }
@@ -120,7 +120,7 @@ namespace Horde.Core.Services
             //check if another user has the same connection. 
             var connection = _<Connection>().FirstOrDefault(c => c.ConnectionKey == platformUserId &&
                                                                  c.Type == type);
-            
+
             var registration = await GetRegistration(platformUserId, userName, type: type, picture: picture);
             return _<User>(registration.UserId, "Registration", "Roles", "Connections");
         }
@@ -151,12 +151,12 @@ namespace Horde.Core.Services
                         Token = token,
                         RefreshToken = refresh,
                         ProfilePicUrl = picture,
-                        PartnerId=Partner.Id
+                        PartnerId = Partner.Id
                     });
-                    user.PartnerId=Partner.Id;
+                    user.PartnerId = Partner.Id;
                     registration.PartnerId = Partner.Id;
                     user.Registration = registration;
-                    user.Roles.Add(new UserRole() { Role = UserRoleType.Player, PartnerId=Partner.Id });
+                    user.Roles.Add(new UserRole() { Role = UserRoleType.Player, PartnerId = Partner.Id });
                     if (string.IsNullOrEmpty(user.ProfilePicUrl))
                         user.ProfilePicUrl = picture;
                     await Save(user);
@@ -183,8 +183,14 @@ namespace Horde.Core.Services
                             existingConnection.ProfilePicUrl = picture;
                     }
                     else
-                        user.Connections.Add(new Connection() { ConnectionKey = platformUserId, Type = type, 
-                            UserName = username, Token = token, RefreshToken = refresh });
+                        user.Connections.Add(new Connection()
+                        {
+                            ConnectionKey = platformUserId,
+                            Type = type,
+                            UserName = username,
+                            Token = token,
+                            RefreshToken = refresh
+                        });
                     if (string.IsNullOrEmpty(user.ProfilePicUrl))
                         user.ProfilePicUrl = picture;
                     await Save(user);
@@ -237,16 +243,16 @@ namespace Horde.Core.Services
                 currentUser = _<User>(registration.UserId);
             try
             {
-               //await GetNew<ZulipService>().GetOrCreateConnection(currentUser);
+                //await GetNew<ZulipService>().GetOrCreateConnection(currentUser);
             }
-            catch(Exception x)
+            catch (Exception x)
             {
                 Log.Error("Could not add zulip chat user for the user {u} due to {e}", currentUser.Id, x.Message);
             }
             return registration;
         }
 
-   
+
         public async Task<User> HandleConnectionRequest(User user)
         {
             var loggedInUser = _<User>(user.Id, "Registration", "Connections");
@@ -261,24 +267,24 @@ namespace Horde.Core.Services
                 var connection = connections.First(c => c.ConnectionKey == loggedInConnection.ConnectionKey
                                                     && c.Type == loggedInConnection.Type);
 
-                    
+
                 //Modify some values and move
-                
-                if(connection.Token.IsNotEqualTo(loggedInConnection.Token, allowEmpty: false))
+
+                if (connection.Token.IsNotEqualTo(loggedInConnection.Token, allowEmpty: false))
                     connection.Token = loggedInConnection.Token;
-                if(connection.RefreshToken.IsNotEqualTo(loggedInConnection.RefreshToken, allowEmpty: false))
+                if (connection.RefreshToken.IsNotEqualTo(loggedInConnection.RefreshToken, allowEmpty: false))
                     connection.RefreshToken = loggedInConnection.RefreshToken;
-                if(connection.UserName.IsNotEqualTo(loggedInConnection.UserName, allowEmpty: false))
+                if (connection.UserName.IsNotEqualTo(loggedInConnection.UserName, allowEmpty: false))
                     connection.UserName = loggedInConnection.UserName;
-                if(connection.ProfilePicUrl.IsNotEqualTo(user.ProfilePicUrl, allowEmpty: false))
+                if (connection.ProfilePicUrl.IsNotEqualTo(user.ProfilePicUrl, allowEmpty: false))
                     connection.ProfilePicUrl = user.ProfilePicUrl;
-                if(connection.Key.IsNotEqualTo(loggedInConnection.Key, allowEmpty: false))
+                if (connection.Key.IsNotEqualTo(loggedInConnection.Key, allowEmpty: false))
                     connection.Key = loggedInConnection.Key;
                 connection.Deleted = false;
                 await Save(connection);
 
             }
-            else 
+            else
             {
                 //if the loggedInConnection belongs to some other user, then throw
                 await HandleNewConnectionOnDevice(loggedInConnection, loggedInUser);
@@ -296,7 +302,7 @@ namespace Horde.Core.Services
         {
 
             var usersWithConnection = _<User>("Connections").Where(u => u.Connections
-            .Any(c => c.ConnectionKey == loggedInConnection.ConnectionKey && 
+            .Any(c => c.ConnectionKey == loggedInConnection.ConnectionKey &&
             c.Type == loggedInConnection.Type && !c.Deleted)).ToList();
             //this is a fresh connection, add to logged in user
             if (usersWithConnection.Count == 0)
@@ -309,20 +315,20 @@ namespace Horde.Core.Services
             //connection exists for different users
             else
             {
-                if(usersWithConnection.Any(u => u.Id == loggedInUser.Id))
+                if (usersWithConnection.Any(u => u.Id == loggedInUser.Id))
                 {
-                    foreach(var user in usersWithConnection)
+                    foreach (var user in usersWithConnection)
                     {
                         ;//await MergeUsers(user, loggedInUser);
                     }
                 }
                 else
                 {
-                    
-                   //do error handling for this
+
+                    //do error handling for this
                 }
             }
-            
+
         }
 
         public async Task AddPlayer(int userId, Player player)
@@ -368,10 +374,10 @@ namespace Horde.Core.Services
             return player;
         }
 
-        
 
 
-        
+
+
 
         public void SetClaims(ClaimsIdentity identity, User user)
         {
@@ -384,13 +390,13 @@ namespace Horde.Core.Services
 
             if (user.ProfilePicUrl == null)
                 user.ProfilePicUrl = user.Connections?.FirstOrDefault(c => c.ProfilePicUrl != null)?.ProfilePicUrl;
-            if(user.ProfilePicUrl != null)
+            if (user.ProfilePicUrl != null)
                 identity.AddClaim(new Claim("Avatar", user.ProfilePicUrl));
             identity.AddClaim(new Claim("UserId", user.Id.ToString()));
 
         }
 
-        
+
 
         public async Task<User> HandleVerification(User user, int refererUserId = 0)
         {
@@ -400,8 +406,9 @@ namespace Horde.Core.Services
             var existingConnection = _<Connection>().FirstOrDefault(c => c.ConnectionKey == loggedInConnection.ConnectionKey &&
                 c.Type == ConnectionType.Whatsapp && !c.Deleted);
             User existingUser = null;
-            
-            if(existingConnection != null) {
+
+            if (existingConnection != null)
+            {
                 existingUser = _<User>(existingConnection.UserId, "Connections");
             }
 
@@ -409,22 +416,22 @@ namespace Horde.Core.Services
             if (existingUser == null)
             {
                 loggedInConnection.UserId = user.Id;
-                
+
                 loggedInConnection.ProfilePicUrl = user.ProfilePicUrl;
                 await Save(loggedInConnection);
                 await Get<VirtualCurrencyService>().AwardJoiningVirtualCurrency(user.Id, refererUserId);
                 var verifiedUser = _<User>(user.Id, "Connections", "Registration");
-                
+
                 return verifiedUser;
             }
             //already verified same user
-            if(user.Id == existingUser?.Id)
+            if (user.Id == existingUser?.Id)
             {
                 return await HandleConnectionRequest(user);
             }
             //already verified different user
             //throw
-            
+
             else
             {
                 throw new Exception($"{existingUser.VerifiedNumber} is already verified by a different account. You have to provide a different number to verify");
@@ -451,7 +458,7 @@ namespace Horde.Core.Services
                 var connections = user.Connections;
                 if (connections.IsNullOrEmpty())
                     connections = _<Connection>().Where(c => c.UserId == user.Id).OrderByDescending(c => c.Id).ToList();
-                foreach(var connection in connections)
+                foreach (var connection in connections)
                 {
                     if (string.IsNullOrEmpty(connection.ProfilePicUrl))
                     {
@@ -465,7 +472,7 @@ namespace Horde.Core.Services
             user.ProfilePicUrl = user.ProfilePicUrl;
         }
 
-        
+
     }
 
     public class ReferralDataRecord
