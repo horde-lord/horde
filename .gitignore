@@ -4,3 +4,5 @@
 /Examples/obj
 /Examples/bin
 *.nupkg
+/Examples/Migrations
+*.db
