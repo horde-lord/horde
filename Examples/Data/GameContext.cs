@@ -1,16 +1,16 @@
 ﻿using Horde.Core.Domains.Games.Entities;
 using Horde.Core.Interfaces.Data;
-using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure.DataContexts
+namespace Examples.Data
 {
     public class GameContext : EfCoreContext
     {
 
         //public GameContext(ILifetimeScope scope) : base(scope) { }
-        public GameContext(DbContextOptions options) : base(options) { }
-
+        //public GameContext(DbContextOptions options) : base(options) { }
+        public GameContext(IConfiguration configuration) : base(configuration) { }
         public override ContextNames Name => ContextNames.Game;
         public DbSet<Game> Games { get; set; }
         public DbSet<Squad> Squads { get; set; }

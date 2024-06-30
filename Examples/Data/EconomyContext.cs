@@ -1,14 +1,15 @@
 ﻿using Horde.Core.Interfaces.Data;
 using Horde.Core.Domains.Economy.Entities;
-using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure.DataContexts
+namespace Examples.Data
 {
     public class EconomyContext : EfCoreContext
     {
 
-        public EconomyContext(DbContextOptions options) : base(options) { }
+        //public EconomyContext(DbContextOptions options) : base(options) { }
+        public EconomyContext(IConfiguration configuration) : base(configuration) { }
         public override ContextNames Name => ContextNames.Economy;
         public DbSet<Account> Accounts { get; set; }
         public DbSet<FinancialEntity> FinancialEntities { get; set; }

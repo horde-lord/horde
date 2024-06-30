@@ -17,7 +17,10 @@ namespace Horde.Core.Domains.World.Services
 
         public void Init()
         {
-            throw new NotImplementedException();
+            
+            //create partner
+            //create create currency
+            
         }
     }
 }

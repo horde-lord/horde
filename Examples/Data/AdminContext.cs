@@ -1,14 +1,14 @@
 ﻿using Horde.Core.Interfaces.Data;
-using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Horde.Core.Domains.Admin.Entities;
+using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure.DataContexts
+namespace Examples.Data
 {
     public class AdminContext : EfCoreContext
     {
 
-        public AdminContext(DbContextOptions options) : base(options) { }
+        public AdminContext(IConfiguration configuration) : base(configuration) { }
 
         public override ContextNames Name => ContextNames.Admin;
         public DbSet<Tenant> Tenants { get; set; }

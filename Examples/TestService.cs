@@ -14,6 +14,8 @@ namespace Examples
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            //Initialize and migrate sqlite
+            GetRepository(ContextNames.World).CreateDatabase();
             Get<WorldService>().Init();
             return Task.CompletedTask;
         }

@@ -7,7 +7,7 @@ namespace Horde.Core.Interfaces.Data
         IQueryable<TEntity> GetQueryable<TEntity>(List<string> includes = null) where TEntity : BaseEntity;
         IQueryable<TEntity> GetQueryable<TEntity>(params string[] includes) where TEntity : BaseEntity;
         Task SaveChanges();
-        TEntity Find<TEntity>(int id) where TEntity : BaseEntity;
+        TEntity? Find<TEntity>(int id) where TEntity : BaseEntity;
         bool IsAlreadyAttached<TEntity>(TEntity entity) where TEntity : BaseEntity;
         void Upsert<TEntity>(TEntity entity) where TEntity : BaseEntity;
         void UpsertRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : BaseEntity;

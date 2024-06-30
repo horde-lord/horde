@@ -27,9 +27,7 @@ namespace Horde.Core.Services
             Scope = scope;
             Configuration = scope.Resolve<IConfiguration>();
             Http = scope.Resolve<IHttpClientFactory>().CreateClient();
-            //var cm = new ConfigurationManager();
-            //cm.AddJsonFile("appsettings.json");
-            //Configuration = cm;
+            
             _tenantManager = scope.Resolve<TenantManager>();
             _defaultContext = name;
         }

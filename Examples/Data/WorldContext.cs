@@ -1,20 +1,21 @@
-﻿using Horde.Core.Domains.World.Entities;
+﻿using Examples.Data;
+using Horde.Core.Domains.World.Entities;
 using Horde.Core.Interfaces.Data;
-using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure.DataContexts
+namespace Examples.Data
 {
     public class WorldContext : EfCoreContext
     {
 
         //public EcosystemContext(ILifetimeScope scope) : base(scope)
         //{
-            
+
         //}
         //public EcosystemContext() : base() { }
-        public WorldContext(DbContextOptions options) : base(options) { }
-
+        //public WorldContext(DbContextOptions options) : base(options) { }
+        public WorldContext(IConfiguration configuration) : base(configuration) { }
         public override ContextNames Name => ContextNames.World;
         public DbSet<User> Users { get; set; }
         public DbSet<Registration> Registrations { get; set; }
@@ -75,14 +76,14 @@ namespace Infrastructure.DataContexts
             modelBuilder.Entity<Alliance>().HasBaseType<Team>();
             modelBuilder.Entity<OrganizerTeam>().HasBaseType<Team>();
             modelBuilder.Entity<Company>().HasBaseType<Team>();
-            modelBuilder.Entity<Company>().Property("Country").HasColumnName("Country");
-            modelBuilder.Entity<Alliance>().Property("Country").HasColumnName("Country");
+            //modelBuilder.Entity<Company>().Property("Country").HasColumnName("Country");
+            //modelBuilder.Entity<Alliance>().Property("BaseCountry").HasColumnName("Country");
 
             modelBuilder.Entity<AllianceMember>().HasBaseType<TeamMember>();
             modelBuilder.Entity<OrganizerTeamMember>().HasBaseType<TeamMember>();
             modelBuilder.Entity<CompanyEmployee>().HasBaseType<TeamMember>();
-            modelBuilder.Entity<CompanyEmployee>().Property("UserId").HasColumnName("UserId");
-            modelBuilder.Entity<OrganizerTeamMember>().Property("UserId").HasColumnName("UserId");
+            //modelBuilder.Entity<CompanyEmployee>().Property("UserId").HasColumnName("UserId");
+            //modelBuilder.Entity<OrganizerTeamMember>().Property("UserId").HasColumnName("UserId");
 
             modelBuilder.Entity<CastingRequest>().HasBaseType<Request>();
             modelBuilder.Entity<Bounty>().HasBaseType<Request>();

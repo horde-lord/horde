@@ -2,6 +2,7 @@
 using Horde.Core.Domains.Economy.Entities;
 using Horde.Core.Domains.Economy.Services;
 using Horde.Core.Domains.World.Services;
+using Horde.Core.Interfaces.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Horde.Core.Domains.Economy
             builder.RegisterType<CurrencyService>().AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.RegisterType<ActivityService>().AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.RegisterType<PaymentService>().AsImplementedInterfaces().InstancePerLifetimeScope();
+            
         }
     }
 }

@@ -1,29 +1,34 @@
 ﻿using Autofac;
+using Autofac.Core;
 using Horde.Core.Domains;
 using Horde.Core.Domains.Admin.Entities;
 using Horde.Core.Interfaces.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure.Repositories
+namespace Examples.Data
 {
     public abstract class EfCoreContext : DbContext, IEntityContext
     {
 
-        public EfCoreContext(ILifetimeScope scope) : base()
-        {
-            this._configuration = scope.Resolve<IConfiguration>();
-            //this._tenantManager = scope.Resolve<TenantManager>();
-        }
+        //public EfCoreContext(ILifetimeScope scope) : base()
+        //{
+        //    //this._tenantManager = scope.Resolve<TenantManager>();
+        //}
 
-        protected EfCoreContext()
-        {
+        //protected EfCoreContext()
+        //{
 
-        }
+        //}
 
-        public EfCoreContext(DbContextOptions options) : base(options)
-        {
+        //public EfCoreContext(DbContextOptions options) : base(options)
+        //{
             
+        //}
+
+        public EfCoreContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
         }
 
         public void SetTenant(Tenant tenant)
@@ -32,14 +37,13 @@ namespace Infrastructure.Repositories
         }
 
         protected int id => _tenant?.Id ?? 1;
-        private readonly IConfiguration _configuration;
-        private readonly ILifetimeScope _scope;
         protected Tenant _tenant;
+        private readonly IConfiguration _configuration;
 
         public Tenant Partner => _tenant;
 
         public virtual ContextNames Name { get; }
-        public string _connectionString { get; private set; } = "Server=216.48.181.29;Database=btxsports;User ID=tribal;Password=d1sc0d@nc3;Trusted_Connection=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
+        public string _connectionString { get; private set; }
 
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
@@ -106,9 +110,7 @@ namespace Infrastructure.Repositories
         public static void Configure(IServiceProvider services, DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = services.GetService(typeof(IConfiguration)) as IConfiguration;
-            var connectionString = "";
-            if (configuration != null && configuration.AsEnumerable().Any(c => c.Key == "BtxSportsDb"))
-                connectionString = configuration["BtxSportsDb"];
+            var connectionString = configuration!.GetConnectionString("HordeDb");
             optionsBuilder
 
                 //.LogTo(Console.WriteLine)
@@ -124,6 +126,17 @@ namespace Infrastructure.Repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            
+            var connectionString = _configuration.GetConnectionString("HordeDb");
+            optionsBuilder
+
+                //.LogTo(Console.WriteLine)
+                //.UseLoggerFactory(loggerFactory)
+                .UseSqlite(connectionString,
+                r =>
+                {
+                    r.CommandTimeout(120);
+                });
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -137,10 +150,8 @@ namespace Infrastructure.Repositories
 
         public void CreateDatabase()
         {
-            if (Database.GetDbConnection().Database.Contains("BtxSportsDb"))
-            {
-                Database.EnsureCreated();
-            }
+            Database.EnsureCreated();
+            
 
 
         }
@@ -166,7 +177,7 @@ namespace Infrastructure.Repositories
 
         public void DeleteDatabase()
         {
-            if (Database.GetDbConnection().Database.Contains("LocalTest"))
+            if (Database.GetDbConnection().Database.Contains("LocalTest")) //random check to ensure that you don't destroy world due to butter fingers!
             {
                 Database.EnsureDeleted();
             }

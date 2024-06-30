@@ -1,16 +1,17 @@
 ﻿using Horde.Core.Interfaces.Data;
-using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Horde.Core.Domains.Commerce;
+using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure.DataContexts
+namespace Examples.Data
 {
     public class CommerceContext : EfCoreContext
     {
         public override ContextNames Name => ContextNames.Commerce;
-        public CommerceContext(DbContextOptions options) : base(options)
-        {
-        }
+        public CommerceContext(IConfiguration configuration) : base(configuration) { }
+        //public CommerceContext(DbContextOptions options) : base(options)
+        //{
+        //}
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<OrderItemTransaction> OrderItemTransactions { get; set; }

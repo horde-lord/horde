@@ -25,7 +25,7 @@ namespace Horde.Core.Domains.World.Entities
         public string ImageUrl { get; set; }
         public int? ConversationId { get; set; }
         public int? CountryId { get; set; }
-        public Country BaseCountry { get; set; }
+        //public Country BaseCountry { get; set; }
         public Conversation Conversation { get; set; }
     }
 
