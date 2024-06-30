@@ -2,3 +2,5 @@
 /.*
 /Core/bin
 /Examples/obj
+/Examples/bin
+*.nupkg
