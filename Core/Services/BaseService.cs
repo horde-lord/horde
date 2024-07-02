@@ -19,7 +19,7 @@ using Horde.Core.Domains.Admin;
 
 namespace Horde.Core.Services
 {
-    public class BaseService : ICoreService
+    public class BaseService : ICoreService, IDisposable
     {
         private readonly ContextNames _defaultContext;
         public BaseService(ILifetimeScope scope, ContextNames name = ContextNames.World)
@@ -234,7 +234,7 @@ namespace Horde.Core.Services
         public virtual async Task Save<T>(T entity) where T : BaseEntity, new()
         {
             var repo = GetRepository(new T().Context);
-            if (entity.PartnerId < 1)
+            if (entity.PartnerId < 1 && entity is not Tenant)
             {
                 if (Partner.Id < 1)
                     throw new Exception($"Tenant is not set correctly at Save. Current value {Partner.Id}");
@@ -341,6 +341,11 @@ namespace Horde.Core.Services
             if (list == null || list.Count() == 0)
                 return true;
             return false;
+        }
+
+        public void Dispose()
+        {
+            ;
         }
     }
 

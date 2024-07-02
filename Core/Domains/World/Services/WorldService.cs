@@ -1,14 +1,9 @@
 ﻿using Autofac;
 using Horde.Core.Domains.Admin.Entities;
-using Horde.Core.Domains.World.Entities;
+using Horde.Core.Domains.Economy.Entities;
+using Horde.Core.Domains.Economy.Services;
 using Horde.Core.Interfaces.Data;
 using Horde.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Horde.Core.Domains.World.Services
 {
@@ -20,22 +15,48 @@ namespace Horde.Core.Domains.World.Services
 
         public async Task  Init()
         {
-            //Create owner
-            var me = new User()
+            var myOrg = _<Tenant>(1);
+            if(myOrg == null)
             {
-                Username = "Me",
-                
-            };
-            me = await Get<RegistrationService>().SearchOrCreateRegistration(me);
-            //create partner
-            var myOrg = new Tenant()
-            {
-                Key = "me",
-                Name = "Me",
-                
+                //create partner
+                myOrg = new Tenant()
+                {
+                    Key = "me",
+                    Name = "Me",
+                    Description = "This is strictly for hello worlding"
+                };
+                await Save(myOrg);
+
             }
-            //create create currency
+
+            using (var registrationService = GetTenanted<RegistrationService>(myOrg.Id))
+            using (var currencyService = GetTenanted<CurrencyService>(myOrg.Id))
+            {
+                var currency = currencyService._<Currency>(1);
+                if(currency == null)
+                {
+                    //Add Currency
+                    currency = new Currency()
+                    {
+                        Name = "My Cool Currency",
+                        ShortName = "MCC",
+                        Type = CurrencyNatureType.DigitalCurrency,
+                        Symbol = "MC🆒",
+                        LogoUrl = "https://example.com/cool-logo.jpg",
+                        Key = "mcc"
+                    };
+                    await currencyService.Save(currency);
+
+                }
+                //Create user
+
+                var me = await registrationService.SearchOrCreateRegistration("MySystemUserId", "Me", ConnectionType.Tenant);
+
+            }
+
+
             
+
         }
     }
 }

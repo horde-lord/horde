@@ -123,7 +123,7 @@ namespace Horde.Core.Domains.Economy.Services
             {
                 throw new Exception("Insufficient balance");
             }
-            var amountInFiat = CalculateConversion(amountRequired, user.CurrencyId, virtualWallet.CurrencyId);
+            var amountInFiat = CalculateConversion(amountRequired, user.CurrencyId.GetValueOrDefault(), virtualWallet.CurrencyId);
             var amountInVirtualCurrency = amountRequired;
             if (gameWallet != null && gameWallet.Balance > 0)
             {

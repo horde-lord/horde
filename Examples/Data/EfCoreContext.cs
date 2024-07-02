@@ -54,12 +54,10 @@ namespace Examples.Data
                 if (entity.State == EntityState.Added)
                 {
                     entity.Entity.CreatedAt = DateTime.UtcNow;
-                    if (entity.Entity.PartnerId < 1)
-                    {
-                        if (Partner.Id < 1)
-                            throw new Exception($"Tenant is not set correctly at Save. Current value {Partner.Id}");
-                        entity.Entity.PartnerId = Partner.Id;
-                    }
+                    //if (entity.Entity.PartnerId < 1)
+                    //{
+                    //   entity.Entity.PartnerId = Partner.Id;
+                    //}
                     
                 }
                 if (entity.State == EntityState.Deleted)

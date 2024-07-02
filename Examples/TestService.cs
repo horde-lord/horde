@@ -19,7 +19,7 @@ namespace Examples
             //run migrations as explained in readme
 
             await Get<WorldService>().Init();
-            return Task.CompletedTask;
+
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

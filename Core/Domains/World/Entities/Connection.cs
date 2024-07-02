@@ -12,18 +12,18 @@ namespace Horde.Core.Domains.World.Entities
         public ConnectionType Type { get; set; }
         [MaxLength(100)]
         public string ConnectionKey { get; set; }
-        public string InteractionId { get; set; }
+        public string? InteractionId { get; set; }
         [MaxLength(20)]
-        public string InviteCode { get; set; }
+        public string? InviteCode { get; set; }
         public DateTime InviteExpiry { get; set; }
         public bool Established { get; set; }
         public int UserId { get; set; }
         [Column("InviteUrl")]
-        public string ProfilePicUrl { get; set; }
-        public string EmailId { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Token { get; set; }
-        public string RefreshToken { get; set; }
+        public string? ProfilePicUrl { get; set; }
+        public string? EmailId { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Token { get; set; }
+        public string? RefreshToken { get; set; }
         
         public int? MergedWithConnectionId { get; internal set; }
     }

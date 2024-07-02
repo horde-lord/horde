@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Horde.Core.Domains.Admin.Entities;
 using Horde.Core.Interfaces.Data;
+using Horde.Core.Services;
 using Horde.Core.Utilities;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
@@ -12,12 +13,14 @@ namespace Horde.Core.Domains.Admin
         public TenantManager(ILifetimeScope scope, IMemoryCache cache)
         {
             _db = scope.Resolve<IRepoReader>();
+            _repos = scope.Resolve<IEnumerable<IEntityContextRepository<IEntityContext>>>().ToList();
             _cache = cache;
             
         }
         private int _tenantId = 1;
         private List<Tenant> _tenants = new();
         private readonly IRepoReader _db;
+        private readonly List<IEntityContextRepository<IEntityContext>> _repos;
         private readonly IMemoryCache _cache;
 
         public Tenant GetTenant()
@@ -48,18 +51,16 @@ namespace Horde.Core.Domains.Admin
 
         private List<Tenant> LoadTenantsGraphFromDb()
         {
-            var batch = _db.GetBatch("select * from admin.tenants;" +
-                "select * from admin.assets;", null,
-                new List<Type>() { typeof(Tenant), typeof(Asset) }.ToArray());
-            var tenants = batch[typeof(Tenant)].Cast<Tenant>().ToList();
+            var repo = _repos.LastOrDefault(r => r.Name == ContextNames.Admin);
+            var tenants = repo.GetNoTrackingQueryable<Tenant>("Assets").ToList();
             
-            var assets = batch[typeof(Asset)].Cast<Asset>().ToList();
-            foreach(var tenant in tenants)
-            {
+            //var assets = _<Asset>().ToList();
+            //foreach(var tenant in tenants)
+            //{
                 
-                tenant.Assets = assets.Where(assets => assets.TenantId == tenant.Id).ToList();
-                tenant.Assets.ForEach(a => a.Tenant = tenant);
-            }
+            //    tenant.Assets = assets.Where(assets => assets.TenantId == tenant.Id).ToList();
+            //    tenant.Assets.ForEach(a => a.Tenant = tenant);
+            //}
             return tenants;
         }
 

@@ -25,7 +25,7 @@ namespace Horde.Core.Domains
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
-        public string Key { get; set; }
+        public string? Key { get; set; }
         public bool Deleted { get; set; }
         public int PartnerId { get; set; } = 0;
         [NotMapped]

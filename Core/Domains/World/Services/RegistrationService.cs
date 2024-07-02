@@ -142,7 +142,7 @@ namespace Horde.Core.Domains.World.Services
                 var userid = _<Connection>().FirstOrDefault(c => c.ConnectionKey == platformUserId && c.Type == type)?.UserId;
                 if (userid == null)
                 {
-                    User user = new User() { Username = username, Connections = new List<Connection>(), EmailId = email };
+                    User user = new User() { Username = username, Connections = new List<Connection>(), EmailId = email, Key = username };
                     user.Connections.Add(new Connection()
                     {
                         ConnectionKey = platformUserId,

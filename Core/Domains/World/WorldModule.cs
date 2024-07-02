@@ -7,7 +7,8 @@ namespace Horde.Core.Domains.World
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<RegistrationService>().AsImplementedInterfaces().InstancePerLifetimeScope();
+            builder.RegisterType<RegistrationService>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
+            builder.RegisterType<WorldService>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
         }
     }
 }

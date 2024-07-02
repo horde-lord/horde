@@ -18,9 +18,9 @@ namespace Horde.Core.Domains.Economy
         protected override void Load(ContainerBuilder builder)
         {
         
-            builder.RegisterType<CurrencyService>().AsImplementedInterfaces().InstancePerLifetimeScope();
-            builder.RegisterType<ActivityService>().AsImplementedInterfaces().InstancePerLifetimeScope();
-            builder.RegisterType<PaymentService>().AsImplementedInterfaces().InstancePerLifetimeScope();
+            builder.RegisterType<CurrencyService>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
+            builder.RegisterType<ActivityService>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
+            builder.RegisterType<PaymentService>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
             
         }
     }

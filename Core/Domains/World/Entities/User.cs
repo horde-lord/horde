@@ -20,8 +20,8 @@ namespace Horde.Core.Domains.World.Entities
         [MaxLength(100)]
         public string Username { get; set; }
         [MaxLength(100)]
-        public string EmailId { get; set; }
-        public string Phone { get; set; }
+        public string? EmailId { get; set; }
+        public string? Phone { get; set; }
         public virtual List<Connection> Connections { get; set; }
         //public List<GameSpecificInfo> GameSpecificInfos { get; set; }
         //public List<OcrLookup> OcrLookups { get; set; }
@@ -29,8 +29,8 @@ namespace Horde.Core.Domains.World.Entities
         public bool IsSuspended { get; set; }
         public virtual List<Member> Members { get; set; }
         public virtual List<UserRole> Roles { get; set; }
-        public string ProfilePicUrl { get; set; }
-        public string VerifiedNumber { get; set; }
+        public string? ProfilePicUrl { get; set; }
+        public string? VerifiedNumber { get; set; }
 
         public int? CountryId { get; set; }
         
@@ -38,8 +38,8 @@ namespace Horde.Core.Domains.World.Entities
         public virtual Country BaseCountry { get; set; }
 
         public int? MergedWithUserId { get; set; }
-        public int CurrencyId { get; set; }
-        public string TimeZone { get; set; }
+        public int? CurrencyId { get; set; }
+        public string? TimeZone { get; set; }
         public virtual List<UserContent> Contents { get; set; } = new();
         [NotMapped]
         public virtual Tenant Partner { get; set; }
@@ -48,10 +48,10 @@ namespace Horde.Core.Domains.World.Entities
 
 
         [MaxLength(200)]
-        public string RealName { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string PinCode { get; set; }
+        public string? RealName { get; set; }
+        public string? Address { get; set; }
+        public string? City { get; set; }
+        public string? PinCode { get; set; }
         public DateTime DateOfBirth { get; set; }
         public GenderType Gender { get; set; }
         [NotMapped]
