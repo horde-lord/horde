@@ -10,22 +10,6 @@
 )](LICENSE)
 
 
-## Table of Contents <!-- omit from toc -->
->
-- [horde](#horde)
-  - [About](#about)
-  - [Features](#features)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-      - [Using libraries from nuget](#using-libraries-from-nuget)
-      - [Using Horde UI](#using-horde-ui)
-      - [Using APIs](#using-apis)
-  - [Usage](#usage)
-- [Example command](#example-command)
-
-
-
 ## About
 
 Horde is a open source solution for gamification with multiple features.
@@ -36,8 +20,6 @@ Horde is a open source solution for gamification with multiple features.
 - Community management
 - E-commerce management
 
-
-![Features](https://linktoimage/)
 
 ## Getting Started
 
@@ -62,8 +44,3 @@ Using librabries from nuget is crrently the only method to set up horde while AP
 
 ## Usage
 
-Sample code blocks
-
-```sh
-# Example command
-example_command
