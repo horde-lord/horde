@@ -2,7 +2,6 @@
 
 # horde
 
-![Logo](https://drive.google.com/file/d/17EaqXOfYmqBJwoWWuwEuCwv0_HEnWLfn/view?usp=sharing.jpeg)
 
 ![CI](https://github.com/horde-lord/horde/actions/workflows/dotnet.yml/badge.svg)
 
@@ -25,10 +24,6 @@ Horde is a open source solution for gamification with multiple features.
 
 ### Prerequisites
 
-List the software and tools required before installing your project.
-
-- Tool 1
-- Tool 2
 
 ### Installation
 
