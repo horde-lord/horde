@@ -8,7 +8,10 @@ using Horde.Core.Interfaces.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
-
+using Humanizer.Configuration;
+using Serilog;
+using Serilog.Exceptions;
+using Serilog.Exceptions.Core;
 namespace Examples
 {
     internal class Program
@@ -43,6 +46,22 @@ namespace Examples
                     services.AddHostedService<TestService>();
                     
                 })
+                .ConfigureLogging(logBuilder =>
+                {
+                    var logConfig = new LoggerConfiguration()
+                            .MinimumLevel.Debug()
+                            .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Information)
+                            .Enrich.FromLogContext()
+                            .Enrich.WithExceptionDetails()
+                            .Enrich.WithProperty("App", Environment.GetCommandLineArgs()[0])
+                            //.Enrich.WithMachineName()
+                            .Enrich.WithExceptionDetails(new DestructuringOptionsBuilder().WithDefaultDestructurers())
+                            .WriteTo.Console();
+                       
+                        Log.Logger = logConfig.CreateLogger();
+                        
+                    })
+
                 .Build()
                 .RunAsync();
         }
