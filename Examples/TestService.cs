@@ -3,6 +3,7 @@ using Horde.Core.Domains.World.Services;
 using Horde.Core.Interfaces.Data;
 using Horde.Core.Services;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Examples
 {
@@ -14,11 +15,21 @@ namespace Examples
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            Task.Run(async () =>
+            {
+                GetRepository(ContextNames.World).CreateDatabase();
+                //run migrations as explained in readme
+                try
+                {
+                    await Get<WorldService>().Start();
+                }
+                catch(Exception ex)
+                {
+                    Log.Error(ex, "The world starter failed");
+                }
+            });
             //Initialize and migrate sqlite
-            GetRepository(ContextNames.World).CreateDatabase();
-            //run migrations as explained in readme
-
-            await Get<WorldService>().Init();
+            
 
         }
 

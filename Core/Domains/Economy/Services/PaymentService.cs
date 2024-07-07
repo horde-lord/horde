@@ -38,6 +38,7 @@ namespace Horde.Core.Domains.Economy.Services
                 CreateOrUpdateDraftTransactionHistoryForAddingGlobalAccountMoney(account.Id, amount, "Internal");
 
             await GetNew<PaymentService>().AddGlobalAccountBalance(transactionHistory.Id);
+
         }
 
 
