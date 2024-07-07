@@ -1,8 +1,10 @@
-﻿namespace Horde.Core.Interfaces;
-
-public interface IProfile: INamed
+﻿namespace Horde.Core.Interfaces
 {
-    public string Description { get; set; }
-    public string ImageUrl { get; set; }
-    
+    public interface IProfile : INamed
+    {
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+
+    }
 }
+

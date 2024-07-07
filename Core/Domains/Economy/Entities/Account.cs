@@ -18,7 +18,7 @@ namespace Horde.Core.Domains.Economy.Entities
         [NotMapped]
         public virtual User User { get; set; }
         public string Name { get; set; }
-        public string Purpose { get; set; }
+        public string? Purpose { get; set; }
         public bool IsFrozen { get; set; }
         //A locked account is like an escrow that can be used only for a single purpose once locked
         public bool IsLocked { get; set; }

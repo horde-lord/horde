@@ -133,54 +133,7 @@ namespace Horde.Core.Domains.Economy.Services
             return transactionHistory;
         }
 
-        public User GetUser(int userId)
-        {
-            var user = _<User>(userId);
-            return user;
-        }
-
-        public User GetUserByDiscordId(string connectionKey)
-        {
-            var user = GetRepository(ContextNames.World).GetNoTrackingQueryable<User>()
-                .SingleOrDefault(u => u.Connections.Any(c => c.ConnectionKey == connectionKey));
-            return user;
-        }
-
-        public List<(string date, decimal amount, string reason, string mode, string narration, int sourceId, int
-            destinationId)> GetTransactionSummaryForAccountId(int id)
-        {
-            try
-            {
-                var results = Scope.Resolve<IRepoReader>()
-                    .Get<(string date, decimal amount, string reason, string mode, string narration, int sourceId, int
-                        destinationId)>
-                    (@"select cast(datepart(day, CreatedAt) as nvarchar) + '-' 
-                    + cast(datepart(MONTH, CreatedAt) as nvarchar) + '-' + 
-                    cast(datepart(YEAR, CreatedAt) as nvarchar) AS Date, 
-                    sum(amount) as Amount, PaymentKey as Reason,Mode,Narration,SourceId,DestinationId from money.Transactions 
-                    where  SourceId = @id or DestinationId = @id
-                    group by datepart(day, CreatedAt), PaymentKey, 
-					datepart(YEAR, CreatedAt), datepart(MONTH, CreatedAt),Mode,Narration,SourceId,DestinationId,CreatedAt
-					order by CreatedAt
-                ", new { id })
-                    .ToList();
-
-                return results.ToList();
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, ex.Message);
-            }
-
-            return null;
-        }
-
-
-        public override IEntityContextRepository<IEntityContext> GetRepository(ContextNames name = ContextNames.Economy)
-        {
-            return base.GetRepository(name);
-        }
-
+        
         private IPaymentProvider GetProvider(Account account)
         {
             var sponsor = _<AccountSponsor>().SingleOrDefault(s => s.Id == account.AccountSponsorId);
@@ -188,73 +141,7 @@ namespace Horde.Core.Domains.Economy.Services
             return provider;
         }
 
-        public async Task<AccountSponsor> CheckOrCreateAccountSponsor(int partnerId, int currencyId, int? countryId, AccountSponsorType sponsorType)
-        {
-            var sponsor = __<AccountSponsor>().FirstOrDefault(a => a.PartnerId == partnerId && a.CurrencyId == currencyId && a.Type == sponsorType);
-            if (sponsor != null)
-                return sponsor;
-
-            var partner = __<Tenant>(partnerId);
-
-            if (partner == null)
-                throw new Exception($"Partner not found id {partnerId}");
-
-            var currency = __<Currency>().FirstOrDefault(c => c.Id == currencyId);
-
-            if (currency == null)
-                throw new Exception($"Currency not found in partner {partnerId} and currencyId {currencyId}");
-            if (currency.Type == CurrencyNatureType.DigitalCurrency && currency.PartnerId != partnerId)
-                throw new Exception($"Currency not found in partner {partnerId} and currencyId {currencyId}");
-
-            var accounts = new List<Account>();
-            var payinAccount = new Account()
-            {
-                Balance = 0.0M,
-                CurrencyId = currencyId,
-                Name = "Pay-in " + currency.ShortName + " Account",
-                Type = AccountType.Global,
-                Purpose = sponsorType.ToString() + " payin",
-                UserId = null,
-                PartnerId = partnerId
-            };
-            accounts.Add(payinAccount);
-
-            var payoutAccount = new Account()
-            {
-                Balance = 0.0M,
-                CurrencyId = currencyId,
-                Name = "Pay-out " + currency.ShortName + " Account",
-                Type = AccountType.Global,
-                Purpose = sponsorType.ToString() + " payout",
-                UserId = null,
-                PartnerId = partnerId
-            };
-            accounts.Add(payoutAccount);
-
-            await GetNew<PaymentService>().Save(accounts);
-
-            sponsor = new AccountSponsor()
-            {
-                CurrencyId = currencyId,
-                PayInAccountId = accounts[0].Id,
-                PayOutAccountId = accounts[1].Id,
-                UserId = 0,
-                Key = sponsorType.ToString(),
-                Type = sponsorType,
-                ProviderName = "",
-                ProviderCredentials = "",
-                CountryId = countryId,
-                PartnerId = partnerId
-            };
-            await GetNew<PaymentService>().Save(sponsor);
-
-            foreach (var account in accounts)
-                account.AccountSponsorId = sponsor.Id;
-
-            await GetNew<PaymentService>().Save(accounts);
-
-            return sponsor;
-        }
+        
 
         public BasePayoutInfo GetAccountPayoutInfo(Account account)
         {
@@ -309,7 +196,7 @@ namespace Horde.Core.Domains.Economy.Services
             var currency = __<Currency>().FirstOrDefault(c => c.Id == currencyId && c.Type == CurrencyNatureType.Fiat);
             if (currency == null)
                 throw new Exception($"Currency not found for Id {currencyId}");
-            var accountSponsor = await CheckOrCreateAccountSponsor(partnerId, currencyId, null, AccountSponsorType.Private);
+            var accountSponsor = await Get<AccountService>().GetOrCreateCentralAccounts(currencyId, AccountSponsorType.Private);
             if (accountSponsor == null)
                 throw new Exception($"Account sponsor not found");
 
@@ -397,36 +284,57 @@ namespace Horde.Core.Domains.Economy.Services
         public decimal GetAccountBalance(int accountId)
         {
 
-            string sql = $@"
-            DECLARE @type INT;
-            DECLARE @currencyType INT;
-            DECLARE @balance DECIMAL(18, 2);
+            //            string sql = $@"
+            //            DECLARE @type INT;
+            //            DECLARE @currencyType INT;
+            //            DECLARE @balance DECIMAL(18, 2);
 
-            SELECT @type = [type], @balance = Balance, @currencyType = (SELECT [Type] FROM [money].Currency 
-WHERE id = CurrencyId) FROM [money].Accounts WHERE id = {accountId};
+            //            SELECT @type = [type], @balance = Balance, @currencyType = (SELECT [Type] FROM [money].Currency 
+            //WHERE id = CurrencyId) FROM [money].Accounts WHERE id = {accountId};
 
-            IF @type = 4
-            BEGIN
-                SELECT @balance = a.outer_bal - b.inner_bal FROM 
-                (SELECT ISNULL(SUM(amount), 0) AS outer_bal FROM money.gatewaypayins WHERE gatewayinputaccountid = {accountId} AND [status] = 2) a
-                INNER JOIN
-                (SELECT ISNULL(SUM(amount), 0) AS inner_bal FROM money.transactions WHERE sourceId = {accountId} AND Locked <> 2) b ON 1 = 1;
-            END
-            ELSE IF @type <> 0 OR (@type = 0 AND @currencyType = 0)
-            BEGIN
-                SELECT @balance = a.outer_bal - b.inner_bal FROM 
-                (SELECT ISNULL(SUM(amount), 0) AS outer_bal FROM money.transactions WHERE destinationId = {accountId} AND Locked = 0) a
-                INNER JOIN
-                (SELECT ISNULL(SUM(amount), 0) AS inner_bal FROM money.transactions WHERE sourceId = {accountId} AND Locked <> 2) b ON 1 = 1;
-            END
+            //            IF @type = 4
+            //            BEGIN
+            //                SELECT @balance = a.outer_bal - b.inner_bal FROM 
+            //                (SELECT ISNULL(SUM(amount), 0) AS outer_bal FROM money.gatewaypayins WHERE gatewayinputaccountid = {accountId} AND [status] = 2) a
+            //                INNER JOIN
+            //                (SELECT ISNULL(SUM(amount), 0) AS inner_bal FROM money.transactions WHERE sourceId = {accountId} AND Locked <> 2) b ON 1 = 1;
+            //            END
+            //            ELSE IF @type <> 0 OR (@type = 0 AND @currencyType = 0)
+            //            BEGIN
+            //                SELECT @balance = a.outer_bal - b.inner_bal FROM 
+            //                (SELECT ISNULL(SUM(amount), 0) AS outer_bal FROM money.transactions WHERE destinationId = {accountId} AND Locked = 0) a
+            //                INNER JOIN
+            //                (SELECT ISNULL(SUM(amount), 0) AS inner_bal FROM money.transactions WHERE sourceId = {accountId} AND Locked <> 2) b ON 1 = 1;
+            //            END
 
-            SELECT @balance AS Balance;";
+            //            SELECT @balance AS Balance;";
 
-            /* var balance = Reader.Get<decimal>
-                 ("select [money].GetAccountBalance(@id)", new { id = accountId }).FirstOrDefault();*/
+            //            /* var balance = Reader.Get<decimal>
+            //                 ("select [money].GetAccountBalance(@id)", new { id = accountId }).FirstOrDefault();*/
 
-            var balance = Reader.Get<decimal>
-                (sql, new { id = accountId }).FirstOrDefault();
+            //            var balance = Reader.Get<decimal>
+            //                (sql, new { id = accountId }).FirstOrDefault();
+            var account = _<Account>(accountId);
+            decimal balance = 0;
+            decimal received = 0; decimal paid = 0;
+            switch (account.Type)
+            {
+                ///Note: Using Tolist on transactions before sum (Client side evaluation) since SQLite doesnt support ops on decimal
+                ///Change this to your own implementation as per your DB.
+                case AccountType.User:
+                    received = _<Transaction>().Where(t => t.DestinationId == accountId && t.Locked == LockType.Open).ToList().Sum(t => t.Amount);
+                    paid = _<Transaction>().Where(t => t.SourceId == accountId && t.Locked != LockType.Rejected).ToList().Sum(t => t.Amount);
+                    balance = received - paid;
+                    break;
+                case AccountType.GatewayInput:
+                    received = _<GatewayPayin>().Where(t => t.GatewayInputAccountId == accountId && t.Status == PayinStatusType.Succeeded).ToList().Sum(t => t.Amount);
+                    paid = _<Transaction>().Where(t => t.SourceId == accountId && t.Locked != LockType.Rejected).ToList().Sum(t => t.Amount);
+                    balance = received - paid;
+                    break;
+                default:
+                    balance = account.Balance;
+                    break;
+            }
 
             return balance;
         }
@@ -809,25 +717,25 @@ WHERE id = CurrencyId) FROM [money].Accounts WHERE id = {accountId};
                     throw new Exception("Source and destination account cannot be same");
 
 
-                var output = Writer.ExecuteProcedureWithResult<int>("upsert_transaction_test", new
-                {
-                    sourceId = transaction.SourceId,
-                    destinationId = transaction.DestinationId,
-                    amount = transaction.Amount,
-                    narration = transaction.Narration,
-                    key = transaction.Key,
-                    paymentAccount = transaction.PaymentAccount,
-                    entityId = transaction.EntityId,
-                    entityType = transaction.EntityType,
-                    paymentKey = transaction.PaymentKey,
-                    mode = transaction.Mode,
-                    partnerId = transaction.PartnerId,
-                    locked = transaction.Locked,
-                }).FirstOrDefault();
-                if (output == 1)
-                    Log.Information("Successfully transfered {0} from {1} to {2}", amount, source.Name,
+                //var output = Writer.ExecuteProcedureWithResult<int>("upsert_transaction_test", new
+                //{
+                //    sourceId = transaction.SourceId,
+                //    destinationId = transaction.DestinationId,
+                //    amount = transaction.Amount,
+                //    narration = transaction.Narration,
+                //    key = transaction.Key,
+                //    paymentAccount = transaction.PaymentAccount,
+                //    entityId = transaction.EntityId,
+                //    entityType = transaction.EntityType,
+                //    paymentKey = transaction.PaymentKey,
+                //    mode = transaction.Mode,
+                //    partnerId = transaction.PartnerId,
+                //    locked = transaction.Locked,
+                //}).FirstOrDefault();
+                await Save(transaction!);
+                Log.Information("Successfully transfered {0} from {1} to {2}", amount, source.Name,
                         destination.Name);
-                transaction.FireEvent(EntityEventType.Created, secondaryEventName: TribeTopics.TransactionMade.ToString(), data:
+                transaction!.FireEvent(EntityEventType.Created, secondaryEventName: TribeTopics.TransactionMade.ToString(), data:
                new() { { "Amount", amount.ToString() } });
 
             }
@@ -953,36 +861,8 @@ WHERE id = CurrencyId) FROM [money].Accounts WHERE id = {accountId};
             return balance;
         }
 
-        public AccountSponsor GetSponsorByType(AccountSponsorType type, int currencyId)
-        {
-            if (currencyId <= 0) currencyId = 1;
-            return _<AccountSponsor>().FirstOrDefault(a => a.Type == type && a.CurrencyId == currencyId);
-        }
-
-        public Account GetGlobalAccountBySponsorType(int currencyId, AccountSponsorType type)
-        {
-            if (currencyId <= 0) currencyId = 1;
-            var sponsor = GetSponsorByType(type, currencyId);
-
-            return _<Account>().FirstOrDefault(a => a.Type == AccountType.Global && a.AccountSponsorId == sponsor.Id && a.CurrencyId == currencyId);
-        }
-
-        public Account GetPayinAccountBySponsorType(int currencyId, AccountSponsorType type)
-        {
-            if (currencyId <= 0) currencyId = 1;
-            var sponsor = GetSponsorByType(type, currencyId);
-
-            return _<Account>(sponsor.PayInAccountId);
-        }
-
-        public Account GetPayoutAccountBySponsorType(int currencyId, AccountSponsorType type)
-        {
-            if (currencyId <= 0) currencyId = 1;
-            var sponsor = GetSponsorByType(type, currencyId);
-
-
-            return _<Account>(sponsor.PayOutAccountId);
-        }
+        
+        
 
 
 
@@ -1002,8 +882,9 @@ WHERE id = CurrencyId) FROM [money].Accounts WHERE id = {accountId};
 
         public decimal GetLockedBalance(int accountId)
         {
-            return Reader.Get<decimal>("select isnull(sum(amount),0) as amount from economy.Transactions where DestinationId = @accountId and locked = 1",
-                new { accountId }).FirstOrDefault();
+            return _<Transaction>().Where(t => t.DestinationId == accountId && t.Locked == LockType.Locked).ToList().Sum(t => t.Amount);
+            //return Reader.Get<decimal>("select isnull(sum(amount),0) as amount from economy.Transactions where DestinationId = @accountId and locked = 1",
+            //    new { accountId }).FirstOrDefault();
         }
 
 

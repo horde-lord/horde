@@ -6,12 +6,7 @@ namespace Horde.Core.Utilities
 {
     public static class CryptographyHelper
     {
-        public static string StringSHA256Hash(string value)
-        {
-            using var hash = SHA256.Create();
-            var byteArray = hash.ComputeHash(Encoding.UTF8.GetBytes(value));
-            return Convert.ToHexString(byteArray).ToLower();
-        }
+        
 
         public static string HashHMACHex(string keyHex, string message)
         {

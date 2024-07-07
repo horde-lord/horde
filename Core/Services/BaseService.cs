@@ -39,14 +39,10 @@ namespace Horde.Core.Services
 
 
 
-        public static void ThrowIfNull<T>(T t, string message = "",
-            [CallerArgumentExpression("t")] string? parameterName = null,
-            [CallerMemberName] string? member = null)
+        public static void ThrowIfNull<T>(T t, string message = "")
         {
             if (t == null)
             {
-                if (string.IsNullOrEmpty(message))
-                    message = $"Parameter {parameterName} of type {typeof(T).Name} called by {member} cannot be null";
                 Log.Error(message);
 
                 throw new ArgumentException(message);
@@ -200,31 +196,9 @@ namespace Horde.Core.Services
             
         }
 
-        /// <summary>
-        /// Finds all elements in first set which do not intersect in second. Compared by Id
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <returns></returns>
-        public virtual List<T> Disjoint<T>(IEnumerable<T> first, IEnumerable<T> second) where T : BaseEntity
-        {
-            return first.ExceptBy(second.Select(t => t.Id), t => t.Id).ToList();
-        }
+        
 
-        /// <summary>
-        /// Finds all elements in first set which do not intersect in second. Compared by func of key
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <param name="f"></param>
-        /// <returns></returns>
-        public virtual List<T> Disjoint<T, TKey>(IEnumerable<T> first, IEnumerable<T> second, Func<T, TKey> f)
-        {
-            return first.ExceptBy(second.Select(f), f).ToList();
-        }
+
         /// <summary>
         /// Saves entity
         /// </summary>

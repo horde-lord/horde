@@ -1,6 +1,5 @@
 ﻿using Horde.Core.Interfaces;
 using Horde.Core.Interfaces.Data;
-using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Horde.Core.Domains.Economy.Entities
@@ -12,7 +11,7 @@ namespace Horde.Core.Domains.Economy.Entities
         public override ContextNames Context => ContextNames.Economy;
 
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public decimal DefaultAmountPerTransaction { get; set; }
         public decimal MinAmountPerTransaction { get; set; }
         public decimal MaxAmountPerTransaction { get; set; }
@@ -54,5 +53,11 @@ namespace Horde.Core.Domains.Economy.Entities
         Completed,
         Cancelled,
         Failed
+    }
+
+    public enum DateInterval
+    {
+        Second, Minute, Hour, Day, Week, Month, Year,
+        WeekOfYear
     }
 }

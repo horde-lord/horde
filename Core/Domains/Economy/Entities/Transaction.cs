@@ -13,16 +13,16 @@ namespace Horde.Core.Domains.Economy.Entities
         public virtual Account Destination { get; set; }
         public int SourceId { get; set; }
         public int DestinationId { get; set; }
-        public string Mode { get; set; }
-        public string PaymentAccount { get; set; }
+        public string? Mode { get; set; }
+        public string? PaymentAccount { get; set; }
         public decimal Amount { get; set; }
-        public string Narration { get; set; }
+        public string? Narration { get; set; }
         //public TransactionStatusType Status { get; set; }
         public string EntityType { get; set; }
         public int EntityId { get; set; }
         public string PaymentKey { get; set; }
         [MaxLength(200)]
-        public string UniqueTransactionKey { get; set; }
+        public string? UniqueTransactionKey { get; set; }
         public LockType Locked { get; set; } = LockType.Open;
         public virtual Activity Activity { get; set; }
         public int? ActivityId { get; set; }

@@ -204,37 +204,7 @@ namespace Horde.Core.Domains.Economy.Services
             if (gatewayPayin.Status == PayinStatusType.Pending || gatewayPayin.Status == PayinStatusType.Undefined)
             {
                 var gatewayOrderId = DateTime.UtcNow.Ticks.ToString();
-                //if (gatewayName == "Stripe")
-                //{
-                //    var apiKey = GetGatewayApiKeyForPartner(AssetType.StripeApiKey, gatewayPayin.PartnerId);
-                //    var session = GetNew<StripeService>().CreateStripeCheckoutSession(order.UserId, apiKey, gatewayPayin.Amount, "gateWayOrderId",
-                //        gatewayOrderId, gatewayPayin.CurrencyId, gatewayPayin.Title,
-                //        GetGatewayPayinRedirectUrl(gatewayPayin.Id, true, orderUrl), GetGatewayPayinRedirectUrl(gatewayPayin.Id, false, gatewayUrl),
-                //        gatewayPayin.ImageUrl);
-                //    gatewayPayin.Url = session?.Url;
-                //}
-                //else if (gatewayName == "OnMeta")
-                //{
-                //    var onMetaApiKey = GetGatewayApiKeyForPartner(AssetType.OnMetaApiKey, gatewayPayin.PartnerId);
-                //    var session = await GetNew<OnMetaService>().CreateOnMetaUpiPayin(onMetaApiKey, (int)gatewayPayin.Amount,
-                //        gatewayPayin.CurrencyId, gatewayOrderId, Partner.Id);
-                //    if (gatewaySubAccount == "UpiQr")
-                //    {
-                //        gatewayPayin.Url = session.QrCheckoutString;
-                //    }
-                //    else
-                //    {
-                //        var name = gatewaySubAccount;
-                //        if (name == "GPay")
-                //            name = "Google Pay";
-                //        var url = session.DeepLinks.FirstOrDefault(d => d.Name == name)?.Url ?? "";
-                //        if (string.IsNullOrEmpty(url))
-                //            throw new Exception($"No url found for gateway sub account {gatewaySubAccount}");
-                //        gatewayPayin.Url = url;
-                //    }
-                //}
-                //else
-                //    throw new Exception($"Gateway Name {gatewayName} not supported");
+                
                 gatewayPayin.GatewayName = gatewayName;
                 gatewayPayin.GatewaySubAccountName = gatewaySubAccount;
                 gatewayPayin.GatewayOrderId = gatewayOrderId;
@@ -259,16 +229,6 @@ namespace Horde.Core.Domains.Economy.Services
         }
 
 
-        //public string GetGatewayPayinRedirectUrl(int gatewayPayinId, bool success, string backUrl = "")
-        //{
-        //    var baseUrl = "https://tribal-share.azurewebsites.net";
-        //    //baseUrl = "https://localhost:7269";
-        //    var token = JwtGenerator.GetToken(new Dictionary<string, string>() { { "gatewayPayinId", gatewayPayinId.ToString() }, { "backUrl", backUrl } }, 180);
-        //    var url = $"{baseUrl}/gateway/payin/success";
-        //    if (!success)
-        //        url = $"{baseUrl}/gateway/payin/cancel";
-        //    return $"{url}?token={token}";
-        //}
 
 
         private async Task<TransactionHistory> CreateGatewayPayinTransactionHistory(GatewayPayin gatewayPayin)
@@ -283,7 +243,7 @@ namespace Horde.Core.Domains.Economy.Services
                 throw new Exception($"No currency found with id {currencyId}");
 
             var service = Scope.GetChild(partnerId).Resolve<PaymentService>();
-            var globalAccountSponsor = await service.GetNew<PaymentService>().CheckOrCreateAccountSponsor(partnerId, currencyId, null, AccountSponsorType.Private);
+            var globalAccountSponsor = await service.GetNew<AccountService>().GetOrCreateCentralAccounts(currencyId, AccountSponsorType.Private);
             var payInAccount = _<Account>().FirstOrDefault(a => a.Id == globalAccountSponsor.PayInAccountId);
             if (payInAccount == null)
                 throw new Exception($"No payin account found with id {globalAccountSponsor.PayInAccountId}");

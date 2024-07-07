@@ -136,7 +136,7 @@ namespace Horde.Core.Domains
 
     public abstract class BaseConfigurableEntity : BaseEntity
     {
-        public string Config { get; set; }
+        public string? Config { get; set; }
         public Dictionary<string, string> GetConfigData()
         {
             return JsonSerializer.Deserialize<Dictionary<string, string>>(Config);

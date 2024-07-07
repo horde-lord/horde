@@ -337,12 +337,7 @@ namespace Horde.Core.Utilities
             return output;
         }
 
-        public static string StripSpecialCharacters(this string str)
-        {
-            str = str.Replace("[", "(").Replace("]", ")");
-            return String.Concat(str.Where(char.IsAscii));
-        }
-
+        
         public static string StripNonNumericCharacters(this string str)
         {
             return String.Concat(str.Where(char.IsDigit));

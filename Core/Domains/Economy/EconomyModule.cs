@@ -21,7 +21,8 @@ namespace Horde.Core.Domains.Economy
             builder.RegisterType<CurrencyService>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.RegisterType<ActivityService>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.RegisterType<PaymentService>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
-            
+            builder.RegisterType<AccountService>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
+
         }
     }
 }

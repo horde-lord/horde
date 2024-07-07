@@ -10,7 +10,7 @@ namespace Horde.Core.Domains.Economy.Entities
         public override ContextNames Context => ContextNames.Economy;
         public int UserId { get; set; }
         public string ProviderName { get; set; }
-        public string ProviderCredentials { get; set; }
+        public string? ProviderCredentials { get; set; }
         public List<Account> SponsoredAccounts { get; set; }
         public int PayInAccountId { get; set; }
         public int PayOutAccountId { get; set; }

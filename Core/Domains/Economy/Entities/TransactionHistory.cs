@@ -11,15 +11,15 @@ namespace Horde.Core.Domains.Economy.Entities
         public Account Destination { get; set; }
         public int? SourceId { get; set; }
         public int DestinationId { get; set; }
-        public string Mode { get; set; }
-        public string PaymentAccount { get; set; }
+        public string? Mode { get; set; }
+        public string? PaymentAccount { get; set; }
         public TransactionType Type { get; set; }
         public decimal Amount { get; set; }
-        public string Narration { get; set; }
+        public string? Narration { get; set; }
         public TransactionStatusType Status { get; set; }
-        public string EntityType { get; set; }
+        public string? EntityType { get; set; }
         public int EntityId { get; set; }
-        public string PaymentKey { get; set; }
+        public string? PaymentKey { get; set; }
 
         [NotMapped]
         public GatewayPayout Payout { get; set; }

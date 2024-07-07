@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Horde.Core.Interfaces.Data;
 using Horde.Core.Services;
-using Horde.Core.Utilities;
 using System.Net.Http.Json;
 
 namespace Horde.Core.Domains.Admin.Services
