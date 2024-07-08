@@ -1,6 +1,6 @@
 
 
-# horde
+# [horde](https://docs.myhorde.live/introduction)
 
 
 ![CI](https://github.com/horde-lord/horde/actions/workflows/dotnet.yml/badge.svg)
@@ -11,31 +11,16 @@
 
 ## About
 
-Horde is a open source solution for gamification with multiple features.
+Horde is an open-source gamification platform designed to boost user engagement and retention.
 
 ## Features
-- Gamification
-- Digital currency management
-- Community management
-- E-commerce management
+
+Here's what horde offers:
+- Virtual Currency: Create and manage your own in-app currency, whether it's coins, gems, or any other collectible. Horde provides a secure and easy-to-use currency management system.
+- Rewards and Badges: Motivate users with badges, levels, and special powers. You can even reward users with physical goods, creating a balanced and rewarding experience.
+- Community Building: Foster user interaction through community spaces where they can share achievements and experiences. (Coming soon!)
+- Contests and Leaderboards: Engage users with contests and leaderboards, providing a platform for friendly competition. (Coming soon!)
 
 
-## Getting Started
-
-### Prerequisites
-
-
-### Installation
-
-Using librabries from nuget is crrently the only method to set up horde while APIs and a webapp is planned for the near future.
-
-
-#### Using libraries from nuget
-
-
-#### Using Horde UI
-
-#### Using APIs
-
-## Usage
-
+Gamification isn’t about turning your business into a game but about rewarding users in meaningful ways that keep them coming back for more. 
+Head to our [site](https://docs.myhorde.live/introduction) for documentation and examples.
